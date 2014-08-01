@@ -1,0 +1,47 @@
+{
+    "title": "开启WPA临时会话",
+    "grouped": true,
+    "controllerName": "QQAPIDemoCommonController",
+    "sections":
+    [
+        {
+            "elements":
+            [
+                {
+                    "type": "QTextElement",
+                    "text": "开启WPA临时会话"
+                }
+            ]
+        },
+        {
+            "elements":
+            [
+                {
+                    "type": "QEntryElement",
+                    "keyboardType": "NumberPad",
+                    "title": "QQ",
+                    "placeholder": "填入对话的QQ号",
+                    "textValue": "",
+                    "bind": "textValue:binding_uin"
+                }
+            ]
+        },
+        {
+            "elements":
+            [
+             {
+             "type": "QButtonElement",
+             "key": "getQQUinOnlineStatues",
+             "title": "获取WPA状态",
+             "controllerAction": "getQQUinOnlineStatues:"
+             },
+                {
+                    "type": "QButtonElement",
+                    "key": "openBtn",
+                    "title": "对话",
+                    "controllerAction": "onOpenWPA:"
+                }
+            ]
+        }
+    ]
+}

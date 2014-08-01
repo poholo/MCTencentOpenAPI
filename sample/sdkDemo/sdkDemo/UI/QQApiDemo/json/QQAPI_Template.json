@@ -1,0 +1,81 @@
+{
+    "title": "分享文本消息",
+    "grouped": true,
+    "controllerName": "QQAPIDemoCommonController",
+    "sections":
+    [
+        {
+            "elements":
+            [
+                {
+                    "type": "QTextElement",
+                    "text": "分享文本消息"
+                }
+            ]
+        },
+        {
+            "elements":
+            [
+                {
+                    "type": "QEntryElement",
+                    "keyboardType": "Default",
+                    "title": "title",
+                    "placeholder": "填入分享的标题",
+                    "textValue": "定向分享标题",
+                    "bind": "textValue:binding_title"
+                },
+                {
+                    "type": "QEntryElement",
+                    "keyboardType": "Default",
+                    "title": "description",
+                    "placeholder": "填入分享的描述",
+                    "textValue": "定向分享描述",
+                    "bind": "textValue:binding_description"
+                },
+                {
+                    "type": "QEntryElement",
+                    "keyboardType": "Default",
+                    "title": "text",
+                    "placeholder": "填入分享的文本内容",
+                    "textValue": "定向分享文本内容",
+                    "bind": "textValue:binding_text"
+                },
+                {
+                    "type": "QEntryElement",
+                    "keyboardType": "Default",
+                    "title": "url",
+                    "placeholder": "填入分享的URL链接",
+                    "textValue": "http://www.163.com",
+                    "bind": "textValue:binding_url"
+                },
+                {
+                    "type": "QEntryElement",
+                    "keyboardType": "Default",
+                    "title": "preview image url",
+                    "placeholder": "填入分享预览图的URL链接",
+                    "textValue": "http://cdni.wired.co.uk/620x413/k_n/NewsForecast%20copy_620x413.jpg",
+                    "bind": "textValue:binding_previewImageUrl"
+                },
+                {
+                    "type": "QEntryElement",
+                    "keyboardType": "Default",
+                    "title": "stream url",
+                    "placeholder": "填入分享音视频的流媒体URL链接",
+                    "textValue": "",
+                    "bind": "textValue:binding_streamUrl"
+                }
+            ]
+        },
+        {
+            "elements":
+            [
+                {
+                    "type": "QButtonElement",
+                    "key": "shareBtn",
+                    "title": "分享",
+                    "controllerAction": "onShareText:"
+                }
+            ]
+        }
+    ]
+}

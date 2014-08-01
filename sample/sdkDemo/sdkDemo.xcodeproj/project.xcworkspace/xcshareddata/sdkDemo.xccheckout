@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>BD33C297-CF3B-4860-949B-152375EEED63</string>
+	<key>IDESourceControlProjectName</key>
+	<string>sdkDemo</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>84C85AC7-D0F7-450C-8E92-544FF16FA674</key>
+		<string>http://tc-svn.tencent.com/bapp/bapp_connect_rep/iossdk_proj/trunk/ios_qqconnect_sdk_jsbridge</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>output/sample/sdkDemo/sdkDemo.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>84C85AC7-D0F7-450C-8E92-544FF16FA674</key>
+		<string>../../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectRepositoryRootDictionary</key>
+	<dict>
+		<key>84C85AC7-D0F7-450C-8E92-544FF16FA674</key>
+		<string>http://tc-svn.tencent.com/bapp/bapp_connect_rep</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>http://tc-svn.tencent.com/bapp/bapp_connect_rep/iossdk_proj/trunk/ios_qqconnect_sdk_jsbridge/output/sample/sdkDemo/sdkDemo.xcodeproj</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>84C85AC7-D0F7-450C-8E92-544FF16FA674</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryBranchesRelativeLocationKey</key>
+			<string>iossdk_proj/branches</string>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.subversion</string>
+			<key>IDESourceControlRepositoryTagsRelativeLocationKey</key>
+			<string>iossdk_proj/tags</string>
+			<key>IDESourceControlRepositoryTrunkRelativeLocationKey</key>
+			<string>iossdk_proj/trunk</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>84C85AC7-D0F7-450C-8E92-544FF16FA674</string>
+			<key>IDESourceControlWCCName</key>
+			<string>release_sdk</string>
+		</dict>
+	</array>
+</dict>
+</plist>

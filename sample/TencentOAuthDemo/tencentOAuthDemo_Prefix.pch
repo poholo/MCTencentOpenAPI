@@ -1,0 +1,9 @@
+//
+// Prefix header for all source files of the 'tencentOAuthDemo' target in the 'tencentOAuthDemo' project
+//
+
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+    #import <UIKit/UIKit.h>
+    #define self_parentViewController (([self parentViewController] != nil || ![self respondsToSelector:@selector(presentingViewController)]) ? [self parentViewController] : [self presentingViewController])
+#endif

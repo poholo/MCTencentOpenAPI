@@ -1,0 +1,470 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		00E1D2EE147F54C8000A8B37 /* QFObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E1D2ED147F54C8000A8B37 /* QFObject.m */; };
+		1D3623260D0F684500981E51 /* tencentOAuthDemoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* tencentOAuthDemoAppDelegate.m */; };
+		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
+		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
+		2899E5220DE3E06400AC0155 /* tencentOAuthDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* tencentOAuthDemoViewController.xib */; };
+		28D7ACF80DDB3853001CB0EB /* tencentOAuthDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* tencentOAuthDemoViewController.m */; };
+		3C5FBDB0175C7744001DCEE3 /* AppInvitationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5FBDAE175C7744001DCEE3 /* AppInvitationViewController.m */; };
+		3C5FBDB1175C7744001DCEE3 /* AppInvitationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C5FBDAF175C7744001DCEE3 /* AppInvitationViewController.xib */; };
+		D176875F1676E7530037B146 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D176875E1676E7530037B146 /* SystemConfiguration.framework */; };
+		D19E1DCD1665F49800773D23 /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D19E1DCC1665F49800773D23 /* ShareViewController.xib */; };
+		D1D7363F16E4B7BE001CD804 /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D1D7363E16E4B7BE001CD804 /* TencentOpenApi_IOS_Bundle.bundle */; };
+		D1D7364116E4B7FE001CD804 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1D7364016E4B7FE001CD804 /* TencentOpenAPI.framework */; };
+		D1D7367316E4CEB0001CD804 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D1D7367216E4CEB0001CD804 /* libsqlite3.dylib */; };
+		D1D7367516E4CECF001CD804 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1D7367416E4CECF001CD804 /* CoreTelephony.framework */; };
+		D1D7367716E4CF03001CD804 /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D1D7367616E4CF03001CD804 /* libz.1.1.3.dylib */; };
+		D1DCD4AA1769AA8300BE61D0 /* Res in Resources */ = {isa = PBXBuildFile; fileRef = D1DCD4A91769AA8300BE61D0 /* Res */; };
+		D1F07ECC1701CE9900A074C8 /* SendStoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1F07ECA1701CE9900A074C8 /* SendStoryViewController.m */; };
+		D1F07ECD1701CE9900A074C8 /* SendStoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1F07ECB1701CE9900A074C8 /* SendStoryViewController.xib */; };
+		F3356F2516F95C9C00ADB305 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F3356F2416F95C9C00ADB305 /* libstdc++.dylib */; };
+		F36FE76416EDFDE80027CAF7 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = F36FE76316EDFDE80027CAF7 /* MainWindow-iPad.xib */; };
+		F36FE76616EDFF7A0027CAF7 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = F36FE76516EDFF7A0027CAF7 /* MainWindow.xib */; };
+		FC3D1DBA168BEB70001B03B3 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC3D1DB9168BEB70001B03B3 /* Default-568h@2x.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3C3FF39D1754E2DD009245EE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3C3FF3961754E2DC009245EE /* TencentOpenApi_IOS.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = ADDE58311683FFD200091EBC;
+			remoteInfo = TencentOpenApi_IOS;
+		};
+		3C3FF39F1754E2DD009245EE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3C3FF3961754E2DC009245EE /* TencentOpenApi_IOS.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = ADDC7A60168D458400FF63EC;
+			remoteInfo = TencentOpenApi_IOS_Bundle;
+		};
+		3C3FF3A11754E2DD009245EE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3C3FF3961754E2DC009245EE /* TencentOpenApi_IOS.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 157A827B16984E26004BAB14;
+			remoteInfo = makeFramework;
+		};
+		3C3FF3A61754E328009245EE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3C3FF3961754E2DC009245EE /* TencentOpenApi_IOS.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 157A827A16984E26004BAB14;
+			remoteInfo = makeFramework;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		00E1D2EC147F54C8000A8B37 /* QFObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QFObject.h; sourceTree = "<group>"; };
+		00E1D2ED147F54C8000A8B37 /* QFObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QFObject.m; sourceTree = "<group>"; };
+		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1D3623240D0F684500981E51 /* tencentOAuthDemoAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tencentOAuthDemoAppDelegate.h; sourceTree = "<group>"; };
+		1D3623250D0F684500981E51 /* tencentOAuthDemoAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tencentOAuthDemoAppDelegate.m; sourceTree = "<group>"; };
+		1D6058910D05DD3D006BFB54 /* QCDemo-1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "QCDemo-1.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		2899E5210DE3E06400AC0155 /* tencentOAuthDemoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = tencentOAuthDemoViewController.xib; sourceTree = "<group>"; };
+		28D7ACF60DDB3853001CB0EB /* tencentOAuthDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tencentOAuthDemoViewController.h; sourceTree = "<group>"; };
+		28D7ACF70DDB3853001CB0EB /* tencentOAuthDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tencentOAuthDemoViewController.m; sourceTree = "<group>"; };
+		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		32CA4F630368D1EE00C91783 /* tencentOAuthDemo_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tencentOAuthDemo_Prefix.pch; sourceTree = "<group>"; };
+		3C3FF3961754E2DC009245EE /* TencentOpenApi_IOS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TencentOpenApi_IOS.xcodeproj; path = ../../../src/TencentOpenApi_IOS.xcodeproj; sourceTree = "<group>"; };
+		3C5FBDAD175C7744001DCEE3 /* AppInvitationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppInvitationViewController.h; sourceTree = "<group>"; };
+		3C5FBDAE175C7744001DCEE3 /* AppInvitationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppInvitationViewController.m; sourceTree = "<group>"; };
+		3C5FBDAF175C7744001DCEE3 /* AppInvitationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppInvitationViewController.xib; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* tencentOAuthDemo-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "tencentOAuthDemo-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		D10228BE16A5055F0093A409 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		D176875E1676E7530037B146 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		D19E1DCC1665F49800773D23 /* ShareViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareViewController.xib; sourceTree = "<group>"; };
+		D1D7363E16E4B7BE001CD804 /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TencentOpenApi_IOS_Bundle.bundle; path = ../../TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
+		D1D7364016E4B7FE001CD804 /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TencentOpenAPI.framework; path = ../../TencentOpenAPI.framework; sourceTree = "<group>"; };
+		D1D7367216E4CEB0001CD804 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		D1D7367416E4CECF001CD804 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		D1D7367616E4CF03001CD804 /* libz.1.1.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.1.3.dylib; path = usr/lib/libz.1.1.3.dylib; sourceTree = SDKROOT; };
+		D1DCD4A91769AA8300BE61D0 /* Res */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Res; sourceTree = "<group>"; };
+		D1F07EC91701CE9900A074C8 /* SendStoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendStoryViewController.h; sourceTree = "<group>"; };
+		D1F07ECA1701CE9900A074C8 /* SendStoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendStoryViewController.m; sourceTree = "<group>"; };
+		D1F07ECB1701CE9900A074C8 /* SendStoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SendStoryViewController.xib; sourceTree = "<group>"; };
+		F3356F2416F95C9C00ADB305 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
+		F36FE76316EDFDE80027CAF7 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "MainWindow-iPad.xib"; sourceTree = "<group>"; };
+		F36FE76516EDFF7A0027CAF7 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		FC3D1DB9168BEB70001B03B3 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1D60588F0D05DD3D006BFB54 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F3356F2516F95C9C00ADB305 /* libstdc++.dylib in Frameworks */,
+				D1D7367716E4CF03001CD804 /* libz.1.1.3.dylib in Frameworks */,
+				D1D7367516E4CECF001CD804 /* CoreTelephony.framework in Frameworks */,
+				D1D7367316E4CEB0001CD804 /* libsqlite3.dylib in Frameworks */,
+				D176875F1676E7530037B146 /* SystemConfiguration.framework in Frameworks */,
+				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
+				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
+				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
+				D1D7364116E4B7FE001CD804 /* TencentOpenAPI.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				D1F07EC91701CE9900A074C8 /* SendStoryViewController.h */,
+				D1F07ECA1701CE9900A074C8 /* SendStoryViewController.m */,
+				D1F07ECB1701CE9900A074C8 /* SendStoryViewController.xib */,
+				3C5FBDAD175C7744001DCEE3 /* AppInvitationViewController.h */,
+				3C5FBDAE175C7744001DCEE3 /* AppInvitationViewController.m */,
+				3C5FBDAF175C7744001DCEE3 /* AppInvitationViewController.xib */,
+				00E1D2EC147F54C8000A8B37 /* QFObject.h */,
+				00E1D2ED147F54C8000A8B37 /* QFObject.m */,
+				1D3623240D0F684500981E51 /* tencentOAuthDemoAppDelegate.h */,
+				1D3623250D0F684500981E51 /* tencentOAuthDemoAppDelegate.m */,
+				28D7ACF60DDB3853001CB0EB /* tencentOAuthDemoViewController.h */,
+				28D7ACF70DDB3853001CB0EB /* tencentOAuthDemoViewController.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1D6058910D05DD3D006BFB54 /* QCDemo-1.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
+			isa = PBXGroup;
+			children = (
+				D1DCD4A91769AA8300BE61D0 /* Res */,
+				3C3FF3961754E2DC009245EE /* TencentOpenApi_IOS.xcodeproj */,
+				F3356F2416F95C9C00ADB305 /* libstdc++.dylib */,
+				D1D7367616E4CF03001CD804 /* libz.1.1.3.dylib */,
+				080E96DDFE201D6D7F000001 /* Classes */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				89B9681D166CA0E5003FCEF3 /* iPad */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = CustomTemplate;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				32CA4F630368D1EE00C91783 /* tencentOAuthDemo_Prefix.pch */,
+				29B97316FDCFA39411CA2CEA /* main.m */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F36FE76516EDFF7A0027CAF7 /* MainWindow.xib */,
+				FC3D1DB9168BEB70001B03B3 /* Default-568h@2x.png */,
+				2899E5210DE3E06400AC0155 /* tencentOAuthDemoViewController.xib */,
+				8D1107310486CEB800E47090 /* tencentOAuthDemo-Info.plist */,
+				D19E1DCC1665F49800773D23 /* ShareViewController.xib */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D1D7363E16E4B7BE001CD804 /* TencentOpenApi_IOS_Bundle.bundle */,
+				D1D7367216E4CEB0001CD804 /* libsqlite3.dylib */,
+				D1D7367416E4CECF001CD804 /* CoreTelephony.framework */,
+				D1D7364016E4B7FE001CD804 /* TencentOpenAPI.framework */,
+				D176875E1676E7530037B146 /* SystemConfiguration.framework */,
+				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
+				1D30AB110D05D00D00671497 /* Foundation.framework */,
+				288765A40DF7441C002DB57D /* CoreGraphics.framework */,
+				D10228BE16A5055F0093A409 /* CoreFoundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3C3FF3971754E2DC009245EE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3C3FF39E1754E2DD009245EE /* libTencentOpenApi_IOS.a */,
+				3C3FF3A01754E2DD009245EE /* TencentOpenApi_IOS_Bundle.bundle */,
+				3C3FF3A21754E2DD009245EE /* libmakeFramework.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		89B9681D166CA0E5003FCEF3 /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+				F36FE76316EDFDE80027CAF7 /* MainWindow-iPad.xib */,
+			);
+			name = iPad;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1D6058900D05DD3D006BFB54 /* QCDemo1 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "QCDemo1" */;
+			buildPhases = (
+				1D60588D0D05DD3D006BFB54 /* Resources */,
+				1D60588E0D05DD3D006BFB54 /* Sources */,
+				1D60588F0D05DD3D006BFB54 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3C3FF3A71754E328009245EE /* PBXTargetDependency */,
+			);
+			name = QCDemo1;
+			productName = tencentOAuthDemo;
+			productReference = 1D6058910D05DD3D006BFB54 /* QCDemo-1.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0450;
+			};
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "tencentOAuthDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+				en,
+			);
+			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 3C3FF3971754E2DC009245EE /* Products */;
+					ProjectRef = 3C3FF3961754E2DC009245EE /* TencentOpenApi_IOS.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				1D6058900D05DD3D006BFB54 /* QCDemo1 */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		3C3FF39E1754E2DD009245EE /* libTencentOpenApi_IOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libTencentOpenApi_IOS.a;
+			remoteRef = 3C3FF39D1754E2DD009245EE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3C3FF3A01754E2DD009245EE /* TencentOpenApi_IOS_Bundle.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = TencentOpenApi_IOS_Bundle.bundle;
+			remoteRef = 3C3FF39F1754E2DD009245EE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3C3FF3A21754E2DD009245EE /* libmakeFramework.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libmakeFramework.a;
+			remoteRef = 3C3FF3A11754E2DD009245EE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1D60588D0D05DD3D006BFB54 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2899E5220DE3E06400AC0155 /* tencentOAuthDemoViewController.xib in Resources */,
+				D19E1DCD1665F49800773D23 /* ShareViewController.xib in Resources */,
+				FC3D1DBA168BEB70001B03B3 /* Default-568h@2x.png in Resources */,
+				D1D7363F16E4B7BE001CD804 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
+				F36FE76416EDFDE80027CAF7 /* MainWindow-iPad.xib in Resources */,
+				F36FE76616EDFF7A0027CAF7 /* MainWindow.xib in Resources */,
+				D1F07ECD1701CE9900A074C8 /* SendStoryViewController.xib in Resources */,
+				D1DCD4AA1769AA8300BE61D0 /* Res in Resources */,
+				3C5FBDB1175C7744001DCEE3 /* AppInvitationViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1D60588E0D05DD3D006BFB54 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
+				1D3623260D0F684500981E51 /* tencentOAuthDemoAppDelegate.m in Sources */,
+				28D7ACF80DDB3853001CB0EB /* tencentOAuthDemoViewController.m in Sources */,
+				00E1D2EE147F54C8000A8B37 /* QFObject.m in Sources */,
+				D1F07ECC1701CE9900A074C8 /* SendStoryViewController.m in Sources */,
+				3C5FBDB0175C7744001DCEE3 /* AppInvitationViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3C3FF3A71754E328009245EE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = makeFramework;
+			targetProxy = 3C3FF3A61754E328009245EE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1D6058940D05DD3E006BFB54 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../..\"",
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = tencentOAuthDemo_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = DEMO1;
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = "tencentOAuthDemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../..\"",
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "QCDemo-1";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		1D6058950D05DD3E006BFB54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../..\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = tencentOAuthDemo_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = DEMO1;
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = "tencentOAuthDemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../..\"",
+				);
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "QCDemo-1";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				TARGETED_DEVICE_FAMILY = 1;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: linzhou zheng (4H6CAS8289)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: linzhou zheng (4H6CAS8289)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "3076BD39-BDB0-46DB-B3FA-F2ABA9C5A05E";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3076BD39-BDB0-46DB-B3FA-F2ABA9C5A05E";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: linzhou zheng (4H6CAS8289)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: linzhou zheng (4H6CAS8289)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "3076BD39-BDB0-46DB-B3FA-F2ABA9C5A05E";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3076BD39-BDB0-46DB-B3FA-F2ABA9C5A05E";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "QCDemo1" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1D6058940D05DD3E006BFB54 /* Debug */,
+				1D6058950D05DD3E006BFB54 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "tencentOAuthDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}
