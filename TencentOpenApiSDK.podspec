@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name                = "TencentOpenApiSDK"
-  s.version             = "2.3.1"
+  s.version             = "2.3.1.1"
   s.summary             = "The Official iOS SDK of Tencent Open API."
   s.homepage            = "http://wiki.open.qq.com"
   s.license             = {
@@ -10,13 +10,25 @@ Pod::Spec.new do |s|
       LICENSE
   }
   s.author              = { "OpenQQ" => "opensupport@qq.com" }
-  s.source              = { :git=> "https://github.com/candyan/TencentOpenApiSDK.git", :tag => "#{s.version}" }
   s.platform            = :ios
-
-  s.vendored_frameworks = 'TencentOpenAPI.framework'
-  s.resource_bundles    = {
-        'TencentOpenAPI' => ['TencentOpenApi_IOS_Bundle.bundle']
-  }
   s.requires_arc = true
+
+  s.source              = { :git=> "https://github.com/candyan/TencentOpenApiSDK.git", :tag => "#{s.version}" }
+
+  s.default_subspec = '64bit'
+
+  s.subspec "64bit" do |tc_64|
+    tc_64.vendored_frameworks = '64Bit/TencentOpenAPI.framework'
+    tc_64.resource_bundles    = {
+      'TencentOpenAPI' => ['64Bit/TencentOpenApi_IOS_Bundle.bundle']
+    }
+  end
+
+  s.subspec "32bit" do |tc_32|
+    tc_32.vendored_frameworks = '32Bit/TencentOpenAPI.framework'
+    tc_32.resource_bundles    = {
+      'TencentOpenAPI' => ['32Bit/TencentOpenApi_IOS_Bundle.bundle']
+    }
+  end
 
 end
