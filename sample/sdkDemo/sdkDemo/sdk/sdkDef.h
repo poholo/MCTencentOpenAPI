@@ -2,8 +2,8 @@
 //  NSObject_sdkDef.h
 //  sdkDemo
 //
-//  Created by qqconnect on 13-4-1.
-//  Copyright (c) 2013年 qqconnect. All rights reserved.
+//  Created by xiaolongzhang on 13-4-1.
+//  Copyright (c) 2013年 xiaolongzhang. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -51,12 +51,8 @@
 #define kTencentApiResp @"kTencentApiResp"
 
 
-//closeWnd
+//????
 #define kCloseWnd @"kCloseWnd"
 
 //string
-
-//openApiResponse
-#define kResponseDidReceived @"kResponseDidReceived"
-#define kMessage  @"kMessage"
 

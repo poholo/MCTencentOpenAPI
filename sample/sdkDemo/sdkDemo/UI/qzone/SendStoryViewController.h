@@ -2,7 +2,7 @@
 //  SendStoryViewController.h
 //  tencentOAuthDemo
 //
-//  Created by qqconnect on 12-11-28.
+//  Created by xiaolongzhang on 12-11-28.
 //
 //
 

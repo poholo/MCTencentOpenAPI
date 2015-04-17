@@ -2,8 +2,8 @@
 //  QQTTableViewController.m
 //  sdkDemo
 //
-//  Created by qqconnect on 13-7-8.
-//  Copyright (c) 2013年 qqconnect. All rights reserved.
+//  Created by xiaolongzhang on 13-7-8.
+//  Copyright (c) 2013年 xiaolongzhang. All rights reserved.
 //
 
 #import "QQTTableViewController.h"
@@ -11,7 +11,6 @@
 #import "sdkCall.h"
 #import "TextAlertView.h"
 #import <TencentOpenAPI/WeiBoAPI.h>
-
 
 @interface QQTTableViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,TCAPIRequestDelegate>
 {
@@ -50,29 +49,10 @@
     return self;
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    
-    if (![[self.navigationController viewControllers] containsObject:self]) {
-        // We were removed from the navigation controller's view controller stack
-        // thus, we can infer that the back button was pressed
-        
-        isStop=false;
-        
-        CFRunLoopStop(CFRunLoopGetCurrent());
-
-        
-    }
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    //由于弹出框和界面是同一水平线，所以需要定义一个开关，防止用户返回后，程序继续进行下去。
-    
-    isStop=true;
 }
 
 - (void)didReceiveMemoryWarning
@@ -83,8 +63,6 @@
 
 - (void)clickMatchNickTips
 {
-    
-    /*
     TextAlertView *alertMatch = [[TextAlertView alloc] initWithTitle:@"请输入匹配字符串" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
     
     //alertMatch.alertViewStyle = UIAlertViewStylePlainTextInput;
@@ -109,49 +87,21 @@
     [alertReqnum show];
     CFRunLoopRun();
     
-     */
     
-    YIPopupTextView* alertMatch = [[YIPopupTextView alloc] initWithPlaceHolder:@"请输入匹配字符串" maxCount:300];
-    alertMatch.delegate = self;
-    [alertMatch showInView:self.view];
+    TCMatchNickTipsDic *params = [TCMatchNickTipsDic dictionary];
     
-    type=@"Marth";
-    CFRunLoopRun();
+    [params setParamMatch:_Marth];
+    [params setParamReqnum:_Reqnum];
     
-    
-    YIPopupTextView* alertReqnum = [[YIPopupTextView alloc] initWithPlaceHolder:@"请输入请求个数,请求个数(1-10)" maxCount:300];
-    alertReqnum.delegate = self;
-    [alertReqnum showInView:self.view];
-    
-    type=@"Reqnum";
-    CFRunLoopRun();
-    
-        
-    if (isStop) {
-        
-        TCMatchNickTipsDic *params = [TCMatchNickTipsDic dictionary];
-        
-        [params setParamMatch:_Marth];
-        [params setParamReqnum:_Reqnum];
-        
-        if (![[[sdkCall getinstance] oauth] matchNickTips:params])
-        {
-            [sdkCall showInvalidTokenOrOpenIDMessage];
-        }
-        
-
+    if (![[[sdkCall getinstance] oauth] matchNickTips:params])
+    {
+        [sdkCall showInvalidTokenOrOpenIDMessage];
     }
-
     
 }
 
-
-
 - (void)clickGetIntimateFriends
 {
-    
-    
-    /*
     TextAlertView *alert = [[TextAlertView alloc] initWithTitle:@"请输入请求个数" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
     
     //alert.alertViewStyle = UIAlertViewStylePlainTextInput;
@@ -163,31 +113,15 @@
     
     [alert show];
     CFRunLoopRun();
-     
-    */
     
-    YIPopupTextView* alertReqnum = [[YIPopupTextView alloc] initWithPlaceHolder:@"请输入请求个数,请求个数(1-10)" maxCount:300];
-    alertReqnum.delegate = self;
-    [alertReqnum showInView:self.view];
+    TCGetIntimateFriendsDic *params = [TCGetIntimateFriendsDic dictionary];
     
-    type=@"Reqnum";
-    CFRunLoopRun();
+    [params setParamReqnum:_Reqnum];
     
-    
-    if (isStop) {
-        
-        TCGetIntimateFriendsDic *params = [TCGetIntimateFriendsDic dictionary];
-        
-        [params setParamReqnum:_Reqnum];
-        
-        if (![[[sdkCall getinstance] oauth] getIntimateFriends:params])
-        {
-            [sdkCall showInvalidTokenOrOpenIDMessage];
-        }
-        
+    if (![[[sdkCall getinstance] oauth] getIntimateFriends:params])
+    {
+        [sdkCall showInvalidTokenOrOpenIDMessage];
     }
-    
-    
 }
 
 - (void)addPicTencentWeibo
@@ -268,15 +202,7 @@
 
         WeiBo_add_pic_t_POST *request = [[WeiBo_add_pic_t_POST alloc] init];
         request.param_pic = image;
-        
-        
-        YIPopupTextView* inputStr = [[YIPopupTextView alloc] initWithPlaceHolder:@"请输入图片名称" maxCount:5];
-        inputStr.delegate = self;
-        [inputStr showInView:picker.view];
-        
-        type=@"inputStr";
-        CFRunLoopRun();
-        
+        [self inputStr:@"输入图片名称"];
         if(nil == _inputStr)
         {
             return;
@@ -350,40 +276,4 @@
     }
 }
 
-#pragma mark -
-
-#pragma mark YIPopupTextViewDelegate
-
-- (void)popupTextView:(YIPopupTextView *)textView willDismissWithText:(NSString *)text
-{
-    
-    NSLog(@"will dismiss");
-    //self.textView.text = text;
-    
-    if ([type isEqualToString:@"Marth"]) {
-        _Marth=text;
-        type=nil;
-    }else if([type isEqualToString:@"Reqnum"]){
-        _Reqnum=text;
-        type=nil;
-    }else if([type isEqualToString:@"inputStr"]){
-        
-        _inputStr=text;
-        type=nil;
-    }
-        
-        
-    CFRunLoopStop(CFRunLoopGetCurrent());
-    
-}
-
-
-- (void)popupTextView:(YIPopupTextView *)textView didDismissWithText:(NSString *)text
-{
-    NSLog(@"did dismiss");
-
-
-}
-
- 
 @end

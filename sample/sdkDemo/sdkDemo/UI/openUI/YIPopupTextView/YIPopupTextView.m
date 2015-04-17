@@ -108,7 +108,7 @@
         _maxCount = maxCount;
         
         _backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 460)];
-        _backgroundView.backgroundColor = [UIColor clearColor];
+        _backgroundView.backgroundColor = [UIColor blackColor];
         _backgroundView.alpha = 0;
         _backgroundView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         
@@ -130,7 +130,7 @@
         self.backgroundColor = [UIColor whiteColor];
         [_popupView addSubview:self];
 #if !IS_ARC
-        //[self release];
+        [self release];
 #endif
         
         if (maxCount > 0) {
@@ -299,8 +299,6 @@
     CGRect frame = _backgroundView.bounds;
     frame.size.height = popupViewHeight;
     _popupView.frame = frame;
-    //edit by peter
-    _popupView.frame=CGRectMake(0, 80, 320, 160);
     
     if (_shouldAnimate) {
         

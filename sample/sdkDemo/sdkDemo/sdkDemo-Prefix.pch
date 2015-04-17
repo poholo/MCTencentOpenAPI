@@ -22,8 +22,7 @@
     #define __has_feature(x) 0 //Compatibility with non-clang compilers.
 #endif  // __has_feature
 
-//导入宏定义
-#import "ConfigMacros.h"
+
 
 #if __has_feature(objc_arc)
     #define __AUTORELEASE(x)   (x)
@@ -43,7 +42,7 @@
     #define __SUPER_DEALLOC    [super dealloc];
 #endif 
 
+
 #define __TencentDemoAppid_  @"222222"
 
 #define PreDefM_APPID @"222222"
-

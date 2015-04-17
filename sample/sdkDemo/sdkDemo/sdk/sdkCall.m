@@ -2,8 +2,8 @@
 //  sdkCall.m
 //  sdkDemo
 //
-//  Created by qqconnect on 13-3-29.
-//  Copyright (c) 2013年 qqconnect. All rights reserved.
+//  Created by xiaolongzhang on 13-3-29.
+//  Copyright (c) 2013年 xiaolongzhang. All rights reserved.
 //
 
 #import "sdkCall.h"
@@ -102,8 +102,7 @@ static sdkCall *g_instance = nil;
 
 - (BOOL)tencentNeedPerformIncrAuth:(TencentOAuth *)tencentOAuth withPermissions:(NSArray *)permissions
 {
-    BOOL incrAuthRes = [tencentOAuth incrAuthWithPermissions:permissions];
-    return !incrAuthRes;
+    return YES;
 }
 
 
@@ -202,18 +201,10 @@ static sdkCall *g_instance = nil;
     [[NSNotificationCenter defaultCenter] postNotificationName:kGetIntimateFriendsResponse object:self userInfo:[NSDictionary dictionaryWithObjectsAndKeys:response, kResponse, nil]];
 }
 
-- (void)responseDidReceived:(APIResponse*)response forMessage:(NSString *)message
+
+- (void)sendStoryResponse:(APIResponse*) response
 {
-    if (nil == response
-        || nil == message)
-    {
-        return;
-    }
-    
-    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
-                              response, kResponse,
-                              message, kMessage, nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:kResponseDidReceived object:self  userInfo:userInfo];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kSendStoryResponse object:self userInfo:[NSDictionary dictionaryWithObjectsAndKeys:response, kResponse, nil]];
 }
 
 - (void)tencentOAuth:(TencentOAuth *)tencentOAuth didSendBodyData:(NSInteger)bytesWritten totalBytesWritten:(NSInteger)totalBytesWritten totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite userData:(id)userData
@@ -228,45 +219,6 @@ static sdkCall *g_instance = nil;
                                                                         viewController, kUIViewController, nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:kCloseWnd object:self  userInfo:userInfo];
 }
-
-- (BOOL)onTencentResp:(TencentApiResp *)resp
-{
-    if (nil == resp)
-    {
-        return NO;
-    }
-    
-    NSArray *arrPhoto = [[resp objReq] arrMessage];
-    for (id photo in arrPhoto)
-    {
-        if ([photo isKindOfClass:[TencentImageMessageObjV1 class]])
-        {
-            NSData *dataImage = [photo dataImage];
-            UIImage *image = [UIImage imageWithData:dataImage];
-            UIImage *thumbImage = [UIImage imageWithData:dataImage scale:0.4];
-            if (nil != image)
-            {
-                [[self photos] addObject:image];
-            }
-            
-            if (nil != thumbImage)
-            {
-                [[self thumbPhotos] addObject:thumbImage];
-            }
-        }
-    }
-   
-    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:resp, kTencentRespObj,nil];
-    [self performSelectorOnMainThread:@selector(post:) withObject:userInfo waitUntilDone:NO];
-    return YES;
-}
-
-- (void)post:(NSDictionary *)userInfo
-{
-
-    [[NSNotificationCenter defaultCenter] postNotificationName:kTencentApiResp object:self userInfo:userInfo];
-}
-
 
 - (int)numberOfPhotosForPhotoGallery:(FGalleryViewController*)gallery
 {

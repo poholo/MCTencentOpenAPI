@@ -2,8 +2,8 @@
 //  cellInfo.h
 //  sdkDemo
 //
-//  Created by qqconnect on 13-7-3.
-//  Copyright (c) 2013年 qqconnect. All rights reserved.
+//  Created by xiaolongzhang on 13-7-3.
+//  Copyright (c) 2013年 xiaolongzhang. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -15,6 +15,7 @@ typedef enum
     kApiQQT,
     kApiQQCloud,
     kApiQQ,
+    kApiQuick,
 }apiType;
 
 typedef enum

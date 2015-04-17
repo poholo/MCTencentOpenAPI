@@ -2,8 +2,8 @@
 //  addTopicViewController.m
 //  sdkDemo
 //
-//  Created by qqconnect on 13-4-16.
-//  Copyright (c) 2013年 qqconnect. All rights reserved.
+//  Created by xiaolongzhang on 13-4-16.
+//  Copyright (c) 2013年 xiaolongzhang. All rights reserved.
 //
 
 #import "addTopicViewController.h"

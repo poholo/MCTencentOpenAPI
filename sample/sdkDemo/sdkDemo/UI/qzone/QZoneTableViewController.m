@@ -2,17 +2,23 @@
 //  QZoneTableViewController.m
 //  sdkDemo
 //
-//  Created by qqconnect on 13-7-8.
-//  Copyright (c) 2013年 qqconnect. All rights reserved.
+//  Created by xiaolongzhang on 13-7-8.
+//  Copyright (c) 2013年 xiaolongzhang. All rights reserved.
 //
 
 #import "QZoneTableViewController.h"
 #import "cellInfo.h"
 #import "sdkCall.h"
 #import "SendStoryViewController.h"
+#import "addShareViewController.h"
 #import "userInfoViewController.h"
 #import "blumListViewController.h"
 #import "addAlbumViewController.h"
+#import "TCApiObjectEditController.h"
+#import "TCApiObjectEditController.h"
+#import "TencentOpenAPI/QQApiInterface.h"
+
+#define TCSafeRelease(__tcObj) { [__tcObj release]; __tcObj = nil; }
 
 @interface QZoneTableViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 {
@@ -45,15 +51,25 @@
         // Custom initialization
         NSMutableArray *cellQZone = [NSMutableArray array];
         [cellQZone addObject:[cellInfo info:@"获取用户信息" target:self Sel:@selector(getInfo) viewController:nil]];
-        [cellQZone addObject:[cellInfo info:@"上传图片" target:self Sel:@selector(uploadPic) viewController:nil]];
-        [cellQZone addObject:[cellInfo info:@"获取相册列表" target:self Sel:@selector(listalbum) viewController:nil]];
+        
+        [cellQZone addObject:[cellInfo info:@"分享到Qzone" target:self Sel:@selector(shareToQzone) viewController:nil]];
+        //[cellQZone addObject:[cellInfo info:@"分享(旧addShare)" target:self Sel:@selector(addShare) viewController:nil]];
+        
         [cellQZone addObject:[cellInfo info:@"创建空间相册" target:self Sel:@selector(addAlbum) viewController:nil]];
+        [cellQZone addObject:[cellInfo info:@"获取相册列表" target:self Sel:@selector(listalbum) viewController:nil]];
+        [cellQZone addObject:[cellInfo info:@"上传图片" target:self Sel:@selector(uploadPic) viewController:nil]];
+        
+        [cellQZone addObject:[cellInfo info:@"发表说说" target:self Sel:@selector(addTopic) viewController:nil]];
+        [cellQZone addObject:[cellInfo info:@"验证空间粉丝" target:self Sel:@selector(checkFans) viewController:nil]];
+        
+        [cellQZone addObject:[cellInfo info:@"发表日志" target:self Sel:@selector(addBlog) viewController:nil]];
         [cellQZone addObject:[cellInfo info:@"设置用户头像" target:self Sel:@selector(setUserHeadPic) viewController:nil]];
         [[super sectionName] addObject:@"QZone"];
         [[super sectionRow] addObject:cellQZone];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeWnd:) name:kCloseWnd object:[sdkCall getinstance]];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(analysisResponse:) name:kGetUserInfoResponse object:[sdkCall getinstance]];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(analysisResponse:) name:kAddShareResponse object:[sdkCall getinstance]];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(analysisResponse:) name:kUploadPicResponse object:[sdkCall getinstance]];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getListAlbumResponse:) name:kGetListAlbumResponse object:[sdkCall getinstance]];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(analysisResponse:) name:kAddTopicResponse object:[sdkCall getinstance]];
@@ -82,6 +98,51 @@
     {
         [sdkCall showInvalidTokenOrOpenIDMessage];
     };
+}
+
+- (void)shareToQzone
+{
+    TCApiObjectEditController *apiObjEditCtrl = [[TCApiObjectEditController alloc] initWithNibName:nil bundle:nil];
+    apiObjEditCtrl.objText.hidden = YES;
+    apiObjEditCtrl.objTitle.text = @"天公作美伦敦奥运圣火点燃成功 火炬传递开启";
+    apiObjEditCtrl.objDesc.text = @"腾讯体育讯 当地时间5月10日中午，阳光和全世界的目光聚焦于希腊最高女祭司手中的火炬上，5秒钟内世界屏住呼吸。火焰骤然升腾的瞬间，古老的号角声随之从赫拉神庙传出——第30届伦敦夏季奥运会圣火在古奥林匹亚遗址点燃。取火仪式前，国际奥委会主席罗格、希腊奥委会主席卡普拉洛斯和伦敦奥组委主席塞巴斯蒂安-科互赠礼物，男祭司继北京奥运会后，再度出现在采火仪式中。";
+    apiObjEditCtrl.objUrl.text = @"http://sports.qq.com/a/20120510/000650.htm";
+    
+    [apiObjEditCtrl modalIn:self withDoneHandler:^(TCApiObjectEditController *editCtrl)
+     {
+         NSURL *previewURL = [NSURL URLWithString:@"http://img1.gtimg.com/sports/pics/hv1/87/16/1037/67435092.jpg"];
+         NSURL* url = [NSURL URLWithString:apiObjEditCtrl.objUrl.text];
+         
+         QQApiNewsObject* imgObj = [QQApiNewsObject objectWithURL:url title:apiObjEditCtrl.objTitle.text description:apiObjEditCtrl.objDesc.text previewImageURL:previewURL];
+         
+         [imgObj setCflag:kQQAPICtrlFlagQZoneShareOnStart];
+         
+         SendMessageToQQReq* req = [SendMessageToQQReq reqWithContent:imgObj];
+         
+         QQApiSendResultCode sent = [QQApiInterface sendReq:req];
+         
+         [self handleSendResult:sent];
+     }
+              cancelHandler:NULL animated:YES];
+    
+    
+    
+    /******************老的addShare方式
+     
+     addShareViewController *viewController = [[addShareViewController alloc] init];
+     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+     //5.0+
+     [self presentModalViewController:navigationController animated:YES];
+     
+     */
+}
+
+- (void)addShare
+{
+    addShareViewController *viewController = [[addShareViewController alloc] init];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    //5.0+
+    [self presentModalViewController:navigationController animated:YES];
 }
 
 - (void)uploadPic
@@ -125,6 +186,46 @@
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
     //5.0+
     [self presentModalViewController:navigationController animated:YES];
+}
+
+- (void)addBlog
+{
+    TCAddOneBlogDic *params = [TCAddOneBlogDic dictionary];
+    params.paramTitle = @"title";
+    params.paramContent = @"哈哈,测试成功";
+    
+	if(![[[sdkCall getinstance] oauth] addOneBlogWithParams:params]){
+        [sdkCall showInvalidTokenOrOpenIDMessage];
+    }
+}
+
+-(void)addTopic
+{
+    TCAddTopicDic *params = [TCAddTopicDic dictionary];
+    params.paramRichtype = @"3";
+    params.paramRichval = @"http://www.tudou.com/programs/view/C0FuB0FTv50/";
+    params.paramCon = @"腾讯addtopic接口测试--失控小警察视频参数";
+    params.paramLbs_nm = @"广东省深圳市南山区高新科技园腾讯大厦";
+    params.paramThirdSource = @"2";
+    params.paramLbs_x = @"39.909407";
+    params.paramLbs_y = @"116.397521";
+    [params setObject:@"test" forKey:PARAM_USER_DATA];
+    
+    if(NO == [[[sdkCall getinstance] oauth] addTopicWithParams:params])
+    {
+        [sdkCall showInvalidTokenOrOpenIDMessage];
+    }
+}
+
+-(void)checkFans
+{
+    TCCheckPageFansDic *params = [TCCheckPageFansDic dictionary];
+    params.paramUserData = @"checkFans";
+    [params setParamPage_id:@"973751369"];
+	
+	if(![[[sdkCall getinstance] oauth] checkPageFansWithParams:params]){
+        [sdkCall showInvalidTokenOrOpenIDMessage];
+    }
 }
 
 -(void)setUserHeadPic
@@ -212,7 +313,7 @@
             NSArray *blumArray = [[response jsonResponse] objectForKey:@"album"];
             if (0 == [blumArray count])
             {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"操作成功" message:@"您的空间还没有相册，赶紧去创建一个吧。" delegate:self cancelButtonTitle:@"好的，这就去" otherButtonTitles: @"算啦", nil];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"操作成功" message:@"您的空间还没有相册，赶紧去创建一个吧。" delegate:self cancelButtonTitle:@"好的，这就去" otherButtonTitles: @"算啦，闲的蛋疼", nil];
                 [alert show];
                 return;
             }
@@ -262,5 +363,54 @@
         }
     }
 }
+
+- (void)handleSendResult:(QQApiSendResultCode)sendResult
+{
+    switch (sendResult)
+    {
+        case EQQAPIAPPNOTREGISTED:
+        {
+            UIAlertView *msgbox = [[UIAlertView alloc] initWithTitle:@"Error" message:@"App未注册" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil];
+            [msgbox show];
+            
+            break;
+        }
+        case EQQAPIMESSAGECONTENTINVALID:
+        case EQQAPIMESSAGECONTENTNULL:
+        case EQQAPIMESSAGETYPEINVALID:
+        {
+            UIAlertView *msgbox = [[UIAlertView alloc] initWithTitle:@"Error" message:@"发送参数错误" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil];
+            [msgbox show];
+            
+            break;
+        }
+        case EQQAPIQQNOTINSTALLED:
+        {
+            UIAlertView *msgbox = [[UIAlertView alloc] initWithTitle:@"Error" message:@"未安装手Q" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil];
+            [msgbox show];
+            
+            break;
+        }
+        case EQQAPIQQNOTSUPPORTAPI:
+        {
+            UIAlertView *msgbox = [[UIAlertView alloc] initWithTitle:@"Error" message:@"API接口不支持" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil];
+            [msgbox show];
+            
+            break;
+        }
+        case EQQAPISENDFAILD:
+        {
+            UIAlertView *msgbox = [[UIAlertView alloc] initWithTitle:@"Error" message:@"发送失败" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil];
+            [msgbox show];
+            
+            break;
+        }
+        default:
+        {
+            break;
+        }
+    }
+}
+
 
 @end

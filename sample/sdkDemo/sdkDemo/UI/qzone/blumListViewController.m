@@ -2,8 +2,8 @@
 //  photoListViewController.m
 //  sdkDemo
 //
-//  Created by qqconnect on 13-4-11.
-//  Copyright (c) 2013年 qqconnect. All rights reserved.
+//  Created by xiaolongzhang on 13-4-11.
+//  Copyright (c) 2013年 xiaolongzhang. All rights reserved.
 //
 
 #import "blumListViewController.h"
@@ -179,7 +179,7 @@
             }
             else
             {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"操作失败" message:@"这个相册好像没有照片哦!赶紧去上传几张吧。" delegate:self cancelButtonTitle:@"好的，这就去" otherButtonTitles: @"算啦", nil];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"操作失败" message:@"这个相册好像没有照片哦!赶紧去上传几张吧。" delegate:self cancelButtonTitle:@"好的，这就去" otherButtonTitles: @"算啦，闲的蛋疼", nil];
                 [alert show];
             }
         }

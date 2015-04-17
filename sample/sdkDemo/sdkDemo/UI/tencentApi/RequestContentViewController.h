@@ -2,7 +2,7 @@
 //  RequestContentViewController.h
 //  tencentOAuthDemo
 //
-//  Created by qqconnect on 13-6-14.
+//  Created by xiaolongzhang on 13-6-14.
 //
 //
 

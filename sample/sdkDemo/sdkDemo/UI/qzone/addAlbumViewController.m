@@ -2,8 +2,8 @@
 //  addAlbumViewController.m
 //  sdkDemo
 //
-//  Created by qqconnect on 13-5-3.
-//  Copyright (c) 2013年 qqconnect. All rights reserved.
+//  Created by xiaolongzhang on 13-5-3.
+//  Copyright (c) 2013年 xiaolongzhang. All rights reserved.
 //
 
 #import <QuartzCore/QuartzCore.h>
@@ -333,7 +333,7 @@
     frame.size.height = kAlbumQuestionHeight;
     _albumQuestion= [[UITextView alloc] initWithFrame:frame];
     [_albumQuestion setFont:[UIFont systemFontOfSize:16.0f]];
-    [_albumQuestion setText:@"这是干嘛用的相册？"];
+    [_albumQuestion setText:@"这是干嘛用的相册?空空，岛岛？"];
     [[_albumQuestion layer] setBorderColor:[[UIColor colorWithRed:(CGFloat)0x33/(CGFloat)0xff green:(CGFloat)0x33/(CGFloat)0xff blue:(CGFloat)0x33/(CGFloat)0xff alpha:1.0f] CGColor]];
     [[_albumQuestion layer] setBorderWidth:1.0f];
     [_albumQuestion setDelegate:self];

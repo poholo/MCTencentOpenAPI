@@ -96,17 +96,7 @@ static NSString *kDetailImageValueObservanceContext = @"imageValue";
 }
 
 - (void)dealloc {
-    int version=[[[UIDevice currentDevice] systemVersion] integerValue];
-    if (version<5) {
-        
-        [self removeObserver:self forKeyPath:@"imageElement.imageValue"];
-        
-    }else
-    {
-        [self removeObserver:self forKeyPath:@"imageElement.imageValue" context:(__bridge void *)(kDetailImageValueObservanceContext)];
-    }
-    
+   [self removeObserver:self forKeyPath:@"imageElement.imageValue" context:(__bridge void *)(kDetailImageValueObservanceContext)];
 }
-
 
 @end

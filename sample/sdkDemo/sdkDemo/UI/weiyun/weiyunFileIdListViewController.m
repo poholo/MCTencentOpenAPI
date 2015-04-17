@@ -2,8 +2,8 @@
 //  weiyunFileIdListViewController.m
 //  sdkDemo
 //
-//  Created by qqconnect on 13-7-2.
-//  Copyright (c) 2013年 qqconnect. All rights reserved.
+//  Created by xiaolongzhang on 13-7-2.
+//  Copyright (c) 2013年 xiaolongzhang. All rights reserved.
 //
 
 #import "weiyunFileIdListViewController.h"

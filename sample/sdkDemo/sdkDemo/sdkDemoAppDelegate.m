@@ -2,25 +2,18 @@
 //  sdkDemoAppDelegate.m
 //  sdkDemo
 //
-//  Created by qqconnect on 13-3-29.
-//  Copyright (c) 2013年 qqconnect. All rights reserved.
+//  Created by xiaolongzhang on 13-3-29.
+//  Copyright (c) 2013年 xiaolongzhang. All rights reserved.
 //
 
 #import "sdkDemoAppDelegate.h"
 #import <TencentOpenAPI/TencentOAuth.h>
 #import "sdkCall.h"
-#import "NSURLRequest+IgnoreSSL.h"
-
-#if __QQAPI_ENABLE__
-#import "TencentOpenAPI/QQApiInterface.h"
-#import "QQAPIDemoEntry.h"
-#endif
 
 @implementation sdkDemoAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-//    [NSURLRequest allowsAnyHTTPSCertificateForHost:nil];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.viewController = [[sdkDemoViewController alloc] initWithStyle:UITableViewStyleGrouped];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:self.viewController];
@@ -59,33 +52,13 @@
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-//    NSString *strUrl = @"http://dajdklajdka?";
-//    url = [NSURL URLWithString:strUrl];
-
-#if __QQAPI_ENABLE__
-    [QQApiInterface handleOpenURL:url delegate:(id<QQApiInterfaceDelegate>)[QQAPIDemoEntry class]];
-#endif
-    
-    if (YES == [TencentOAuth CanHandleOpenURL:url])
-    {
-        //UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Where from" message:url.description delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
-        //[alertView show];
-        return [TencentOAuth HandleOpenURL:url];
-    }
-    return YES;
+    return [TencentOAuth HandleOpenURL:url];
 }
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
 {
-#if __QQAPI_ENABLE__
-    [QQApiInterface handleOpenURL:url delegate:(id<QQApiInterfaceDelegate>)[QQAPIDemoEntry class]];
-#endif
-    
-    if (YES == [TencentOAuth CanHandleOpenURL:url])
-    {
-        return [TencentOAuth HandleOpenURL:url];
-    }
-    return YES;
+    return [TencentOAuth HandleOpenURL:url];
 }
+
 
 @end

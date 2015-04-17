@@ -2,7 +2,7 @@
 //  RequestContentViewController.m
 //  tencentOAuthDemo
 //
-//  Created by qqconnect on 13-6-14.
+//  Created by xiaolongzhang on 13-6-14.
 //
 //
 
@@ -38,17 +38,13 @@
     UIBarButtonItem *cancle = [[UIBarButtonItem alloc] initWithTitle:@"返回腾讯APP" style:UIBarButtonItemStylePlain target:self action:@selector(cancle)];
     [[self navigationItem] setRightBarButtonItem:cancle];
     [cancle release];
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
 }
 
 
 - (void)cancle
 {
     TencentApiResp *resp = [TencentApiResp respFromReq:_req];
-    NSUInteger ret = [TencentApiInterface sendRespMessageToTencentApp:resp];
+    NSUInteger ret = [TencentOAuth sendRespMessageToTencentApp:resp];
     if (0 == ret)
     {
         if ([[[UIDevice currentDevice] systemVersion] floatValue] > 5.0)
@@ -64,6 +60,7 @@
     else
     {
         NSString *errMsg = nil;
+        //pangzhang todo error
         switch (ret)
         {
             case kTencentApiPlatformUninstall:
@@ -357,6 +354,7 @@
         }
     }
     
+    //pangzhang 先这样处理 选择之后我在4S的机器上发现点击不了退出
     if ([[[UIDevice currentDevice] systemVersion] floatValue] > 5.0)
     {
         [picker dismissViewControllerAnimated:YES completion:nil];
@@ -399,7 +397,7 @@
     {
         TencentTextMessageObjV1 *obj = (TencentTextMessageObjV1 *)[_dataSource objectAtIndex:row];
         [obj setSText:text];
-        [obj setDictExpandInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"1",@"2",@"3",@"4",@"5",@"6", nil]];
+        
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"文字" message:text delegate:nil cancelButtonTitle:@"了解" otherButtonTitles:nil, nil];
         [alertView show];
         [alertView release];

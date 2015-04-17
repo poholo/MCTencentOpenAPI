@@ -2,7 +2,7 @@
 //  SendStoryViewController.m
 //  tencentOAuthDemo
 //
-//  Created by qqconnect on 12-11-28.
+//  Created by xiaolongzhang on 12-11-28.
 //
 //
 
@@ -41,7 +41,7 @@
     if (self)
     {
         // Custom initialization
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sendStoryResponse:) name:kResponseDidReceived object:[sdkCall getinstance]];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sendStoryResponse:) name:kSendStoryResponse object:[sdkCall getinstance]];
     }
     return self;
 }
@@ -118,8 +118,7 @@
     if (notify)
     {
         APIResponse *response = [[notify userInfo] objectForKey:kResponse];
-        NSString    *messsage = [[notify userInfo] objectForKey:kMessage];
-        if (URLREQUEST_SUCCEED == response.retCode && kOpenSDKErrorSuccess == response.detailRetCode && [messsage isEqualToString:@"SendStory"])
+        if (URLREQUEST_SUCCEED == response.retCode && kOpenSDKErrorSuccess == response.detailRetCode)
         {
             NSMutableString *str=[NSMutableString stringWithFormat:@""];
             for (id key in response.jsonResponse)

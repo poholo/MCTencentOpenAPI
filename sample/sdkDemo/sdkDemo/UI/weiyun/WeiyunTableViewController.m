@@ -2,8 +2,8 @@
 //  WeiyunTableViewController.m
 //  sdkDemo
 //
-//  Created by qqconnect on 13-7-8.
-//  Copyright (c) 2013年 qqconnect. All rights reserved.
+//  Created by xiaolongzhang on 13-7-8.
+//  Copyright (c) 2013年 xiaolongzhang. All rights reserved.
 //
 
 #import "WeiyunTableViewController.h"
@@ -24,13 +24,11 @@
 @interface WeiyunTableViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, TCAPIRequestDelegate, TCAPIRequestDownloadDelegate, TCAPIRequestUploadDelegate, UIAlertViewDelegate, weiyunFileIdListDelegate>
 {
     FGalleryViewController  *_localGallery;
-    UIImagePickerController *uploadPic_ipc;
     UIProgressView          *_progressView;
     
     NSString                *_recordKey;
     NSString                *_recordValue;
     NSString                *_inputStr;
-    weiyunFileIdListViewController *_weiyunFileIdListViewController;
 }
 
 @property (nonatomic, retain)NSMutableArray *picFileId;
@@ -40,7 +38,6 @@
 @property (nonatomic, retain)NSMutableArray *weiyunOperateArray;
 @property (nonatomic, retain)NSMutableArray *arrCgiRequest;
 @property (nonatomic, retain)NSArray    *arrWeiyunCell;
-@property (nonatomic, retain)weiyunFileIdListViewController *weiyunFileIdListViewController;
 
 @end
 
@@ -52,10 +49,6 @@
 @synthesize allRecord = _allRecord;
 @synthesize arrCgiRequest = _arrCgiRequest;
 
-- (void)dealloc
-{
-    __SUPER_DEALLOC;
-}
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -125,31 +118,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    isImagePic=false;
-    
-    //由于弹出框和界面是同一水平线，所以需要定义一个开关，防止用户返回后，程序继续进行下去。
-    
-    isStop=true;
-    
-    isGetList=false;
-}
-
-
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    
-    if (![[self.navigationController viewControllers] containsObject:self]) {
-        // We were removed from the navigation controller's view controller stack
-        // thus, we can infer that the back button was pressed
-        
-        isStop=false;
-        
-        CFRunLoopStop(CFRunLoopGetCurrent());
-        
-        
-    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -179,35 +147,10 @@
     {
         case kWeiyunPhoto:
         {
-            ipc = [[UIImagePickerController alloc] init];
-            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]){
-                ipc.sourceType =  UIImagePickerControllerSourceTypePhotoLibrary;
-                if (kWeiyunPhoto == type)
-                {
-                    isImagePic=true;
-                    ipc.mediaTypes = [NSArray arrayWithObjects:(NSString *)kUTTypeImage, nil];
-                }
-                else if (kWeiyunVideo == type)
-                {
-                    ipc.mediaTypes = [NSArray arrayWithObjects:@"public.movie",nil];
-                }
-                
-            }
-            ipc.delegate = self;
-            if (uploadPic_ipc)
-            {
-                __RELEASE(uploadPic_ipc);
-                uploadPic_ipc = nil;
-            }
-            uploadPic_ipc = __RETAIN(ipc);
-            if ([[[UIDevice currentDevice] systemVersion] floatValue] > 5.0)
-            {
-                [self presentViewController:ipc animated:YES completion:nil];
-            }
-            else
-            {
-                [self presentModalViewController:ipc animated:YES];
-            }
+            NSString *imagePath = [NSString stringWithFormat:@"%@/weiyun@2x.png",[[NSBundle mainBundle] resourcePath]];
+            data = [[NSData alloc] initWithContentsOfFile:imagePath];
+            request = [[WeiYun_upload_photo_GET alloc] init];
+            [self sendWeiyunUploadRequest:request data:data fileSuffix:@".png"];
             return;
         }
         case kWeiyunVideo:
@@ -235,55 +178,31 @@
 
 - (void)weiyunDownload:(NSNumber *)weiyunType
 {
-    if (_weiyunFileIdListViewController)
-    {
-        NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[self.navigationController viewControllers]];
-        [viewControllers removeObject:_weiyunFileIdListViewController];
-        [self.navigationController setViewControllers:viewControllers];
-        __RELEASE(_weiyunFileIdListViewController);
-    }
-    _weiyunFileIdListViewController = [[weiyunFileIdListViewController alloc] init];
+    weiyunFileIdListViewController *viewController = [[weiyunFileIdListViewController alloc] init];
     NSUInteger type = [weiyunType unsignedIntegerValue];
     switch (type)
     {
         case kWeiyunPhoto:
-            [_weiyunFileIdListViewController setArrFileInfo:_picFileId];
-            [_weiyunFileIdListViewController setContentType:kWeiyunListPic];
+            [viewController setArrFileInfo:_picFileId];
+            [viewController setContentType:kWeiyunListPic];
             break;
         case kWeiyunMusic:
-            [_weiyunFileIdListViewController setArrFileInfo:_audioFileId];
-            [_weiyunFileIdListViewController setContentType:kWeiyunListAudio];
+            [viewController setArrFileInfo:_audioFileId];
+            [viewController setContentType:kWeiyunListAudio];
             break;
         case kWeiyunVideo:
-            [_weiyunFileIdListViewController setArrFileInfo:_videoFileId];
-            [_weiyunFileIdListViewController setContentType:kWeiyunListVideo];
+            [viewController setArrFileInfo:_videoFileId];
+            [viewController setContentType:kWeiyunListVideo];
             break;
         default:
             break;
     }
     
-    [_weiyunFileIdListViewController setOperateType:kWeiyunDownload];
-    [_weiyunFileIdListViewController setDelegate:self];
+    [viewController setOperateType:kWeiyunDownload];
+    [viewController setDelegate:self];
     
-    UIAlertView *alertview=[[UIAlertView alloc]initWithTitle:@"请先获取列表" message:@"是否现在获取列表？" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:@"算啦", nil];
-    alertview.tag = [weiyunType unsignedIntegerValue];
-    [alertview show];
-    __RELEASE(alertview);
-    
-    [[self navigationController] pushViewController:_weiyunFileIdListViewController animated:YES];
-}
-
-
--(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-   
-    NSLog(@"dissmiss");
-    if ([[alertView title] isEqualToString:@"请先获取列表"]&&buttonIndex==0)
-    {
-        [self weiyunGetList:[NSNumber numberWithInteger:alertView.tag]];
-    }else{
-        [self queryAllRecord:[NSNumber numberWithInteger:alertView.tag]];
-    }
+    [[self navigationController] pushViewController:viewController animated:YES];
+    __RELEASE(viewController);
 }
 
 - (void)weiyunGetList:(NSNumber *)weiyunType
@@ -308,80 +227,49 @@
     request.param_number = @"100";
     request.param_offset = @"0";
     [self sendCgiRequest:request];
-    isGetList=true;
 }
 
 - (void)weiyunDelData:(NSNumber *)weiyunType
 {
-    
-    
-    if (_weiyunFileIdListViewController)
-    {
-        NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[self.navigationController viewControllers]];
-        [viewControllers removeObject:_weiyunFileIdListViewController];
-        [self.navigationController setViewControllers:viewControllers];
-        __RELEASE(_weiyunFileIdListViewController);
-    }
-    
-    _weiyunFileIdListViewController = [[weiyunFileIdListViewController alloc] init];
+    weiyunFileIdListViewController *viewController = [[weiyunFileIdListViewController alloc] init];
     NSUInteger type = [weiyunType unsignedIntegerValue];
     switch (type)
     {
         case kWeiyunPhoto:
-            [_weiyunFileIdListViewController setArrFileInfo:_picFileId];
-            [_weiyunFileIdListViewController setContentType:kWeiyunListPic];
+            [viewController setArrFileInfo:_picFileId];
+            [viewController setContentType:kWeiyunListPic];
             break;
         case kWeiyunMusic:
-            [_weiyunFileIdListViewController setArrFileInfo:_audioFileId];
-            [_weiyunFileIdListViewController setContentType:kWeiyunListAudio];
+            [viewController setArrFileInfo:_audioFileId];
+            [viewController setContentType:kWeiyunListAudio];
             break;
         case kWeiyunVideo:
-            [_weiyunFileIdListViewController setArrFileInfo:_videoFileId];
-            [_weiyunFileIdListViewController setContentType:kWeiyunListVideo];
+            [viewController setArrFileInfo:_videoFileId];
+            [viewController setContentType:kWeiyunListVideo];
             break;
         default:
             break;
     }
     
-    [_weiyunFileIdListViewController setOperateType:kWeiyunDelete];
-    [_weiyunFileIdListViewController setDelegate:self];
+    [viewController setOperateType:kWeiyunDelete];
+    [viewController setDelegate:self];
     
-    
-    UIAlertView *alertview=[[UIAlertView alloc]initWithTitle:@"请先获取列表" message:@"是否现在获取列表？" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:@"算啦", nil];
-    alertview.tag = [weiyunType unsignedIntegerValue];
-    [alertview show];
-    __RELEASE(alertview);
-    
-    
-    [[self navigationController] pushViewController:_weiyunFileIdListViewController animated:YES];
+    [[self navigationController] pushViewController:viewController animated:YES];
+    __RELEASE(viewController);
 }
 
 - (void)weiyunGetThumbPic:(NSNumber *)weiyunType
 {
-    if (_weiyunFileIdListViewController)
-    {
-        NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[self.navigationController viewControllers]];
-        [viewControllers removeObject:_weiyunFileIdListViewController];
-        [self.navigationController setViewControllers:viewControllers];
-        __RELEASE(_weiyunFileIdListViewController);
-    }
-    
-    _weiyunFileIdListViewController = [[weiyunFileIdListViewController alloc] init];
+    weiyunFileIdListViewController *viewController = [[weiyunFileIdListViewController alloc] init];
     NSUInteger type = [weiyunType unsignedIntegerValue];
     if (kWeiyunPhoto == type)
     {
-        [_weiyunFileIdListViewController setArrFileInfo:_picFileId];
-        [_weiyunFileIdListViewController setOperateType:kWeiyunDownloadThumb];
-        [_weiyunFileIdListViewController setDelegate:self];
+        [viewController setArrFileInfo:_picFileId];
+        [viewController setOperateType:kWeiyunDownloadThumb];
+        [viewController setDelegate:self];
         
-        
-        UIAlertView *alertview=[[UIAlertView alloc]initWithTitle:@"请先获取列表" message:@"是否现在获取列表？" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:@"算啦", nil];
-        alertview.tag = [weiyunType unsignedIntegerValue];
-        [alertview show];
-        __RELEASE(alertview);
-        
-        
-        [[self navigationController] pushViewController:_weiyunFileIdListViewController animated:YES];
+        [[self navigationController] pushViewController:viewController animated:YES];
+        __RELEASE(viewController);
     }
 }
 
@@ -390,14 +278,12 @@
     NSUInteger type = [weiyunType unsignedIntegerValue];
     if (kWeiyunRecord == type)
     {
-        
         [self inputRecordKey];
         
         if (nil == _recordKey)
         {
             return;
         }
-        
         
         NSString *key = [[_recordKey dataUsingEncoding:NSUTF8StringEncoding] stringWithHexBytes2];
         WeiYun_check_record_GET *request = [[WeiYun_check_record_GET alloc] init];
@@ -409,40 +295,27 @@
 
 - (void)getRecord:(NSNumber *)weiyunType
 {
-    if (_weiyunFileIdListViewController)
-    {
-        NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[self.navigationController viewControllers]];
-        [viewControllers removeObject:_weiyunFileIdListViewController];
-        [self.navigationController setViewControllers:viewControllers];
-        __RELEASE(_weiyunFileIdListViewController);
-    }
-    
-    
-    _weiyunFileIdListViewController = [[weiyunFileIdListViewController alloc] init];
+    weiyunFileIdListViewController *viewController = [[weiyunFileIdListViewController alloc] init];
     NSUInteger type = [weiyunType unsignedIntegerValue];
     if (kWeiyunRecord == type)
     {
-        [_weiyunFileIdListViewController setArrFileInfo:_allRecord];
-        [_weiyunFileIdListViewController setOperateType:kWeiyunGetRecord];
-        [_weiyunFileIdListViewController setContentType:kWeiyunListRecord];
-        [_weiyunFileIdListViewController setDelegate:self];
+        [viewController setArrFileInfo:_allRecord];
+        [viewController setOperateType:kWeiyunGetRecord];
+        [viewController setContentType:kWeiyunListRecord];
+        [viewController setDelegate:self];
         
-        UIAlertView *alertview=[[UIAlertView alloc]initWithTitle:@"请先获取记录列表" message:@"是否现在获取列表？" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:@"算啦", nil];
-        alertview.tag = [weiyunType unsignedIntegerValue];
-        [alertview show];
-        __RELEASE(alertview);
-        
-        
-        [[self navigationController] pushViewController:_weiyunFileIdListViewController animated:YES];
+        [[self navigationController] pushViewController:viewController animated:YES];
+        __RELEASE(viewController);
     }
 }
+
+
 
 - (void)createRecord:(NSNumber *)weiyunType
 {
     NSUInteger type = [weiyunType unsignedIntegerValue];
     if (kWeiyunRecord == type)
     {
-        
         [self inputRecordKey];
         [self inputRecordValue];
         
@@ -451,9 +324,6 @@
         {
             return;
         }
-        
-        
-        
         NSString *key = [[_recordKey dataUsingEncoding:NSUTF8StringEncoding] stringWithHexBytes2];
         NSString *value = [[_recordValue dataUsingEncoding:NSUTF8StringEncoding] stringWithHexBytes2];
         WeiYun_create_record_POST *request = [[WeiYun_create_record_POST alloc] init];
@@ -468,7 +338,6 @@
     NSUInteger type = [weiyunType unsignedIntegerValue];
     if (kWeiyunRecord == type)
     {
-        
         [self inputRecordKey];
         [self inputRecordValue];
         
@@ -477,8 +346,6 @@
         {
             return;
         }
-        
-        
         NSString *key = [[_recordKey dataUsingEncoding:NSUTF8StringEncoding] stringWithHexBytes2];
         NSString *value = [[_recordValue dataUsingEncoding:NSUTF8StringEncoding] stringWithHexBytes2];
         WeiYun_modify_record_POST *request = [[WeiYun_modify_record_POST alloc] init];
@@ -491,30 +358,17 @@
 
 - (void)delRecord:(NSNumber *)weiyunType
 {
-    if (_weiyunFileIdListViewController)
-    {
-        NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[self.navigationController viewControllers]];
-        [viewControllers removeObject:_weiyunFileIdListViewController];
-        [self.navigationController setViewControllers:viewControllers];
-        __RELEASE(_weiyunFileIdListViewController);
-    }
-    
-    _weiyunFileIdListViewController = [[weiyunFileIdListViewController alloc] init];
+    weiyunFileIdListViewController *viewController = [[weiyunFileIdListViewController alloc] init];
     NSUInteger type = [weiyunType unsignedIntegerValue];
     if (kWeiyunRecord == type)
     {
-        [_weiyunFileIdListViewController setArrFileInfo:_allRecord];
-        [_weiyunFileIdListViewController setOperateType:kWeiyunDelRecord];
-        [_weiyunFileIdListViewController setContentType:kWeiyunListRecord];
-        [_weiyunFileIdListViewController setDelegate:self];
+        [viewController setArrFileInfo:_allRecord];
+        [viewController setOperateType:kWeiyunDelRecord];
+        [viewController setContentType:kWeiyunListRecord];
+        [viewController setDelegate:self];
         
-        UIAlertView *alertview=[[UIAlertView alloc]initWithTitle:@"请先获取记录列表" message:@"是否现在获取列表？" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:@"算啦", nil];
-        alertview.tag = [weiyunType unsignedIntegerValue];
-        [alertview show];
-        __RELEASE(alertview);
-        
-        
-        [[self navigationController] pushViewController:_weiyunFileIdListViewController animated:YES];
+        [[self navigationController] pushViewController:viewController animated:YES];
+        __RELEASE(viewController);
     }
 }
 
@@ -534,145 +388,73 @@
     request.param_md5 = [data md5];
     
     [self inputStr:@"输入文件名"];
-    
-    if(isStop){
-        
-        if(0 == [_inputStr length])
-        {
-            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-            [dateFormatter setDateFormat:@"HH_mm_ss"];
-            NSString *name = [dateFormatter stringFromDate:[NSDate date]];
-            request.param_name = [NSString stringWithFormat:@"%@.%@",name, fileSuffix];
-            __RELEASE(dateFormatter);
-        }
-        else
-        {
-            request.param_name = [NSString stringWithFormat:@"%@.%@",_inputStr, fileSuffix];
-        }
-        
-        request.param_size = [NSString stringWithFormat:@"%u", [data length]];
-        request.param_upload_type = @"control";
-        request.paramUploadData = data;
-        
-        [self sendCgiRequest:request];
+    if(nil == _inputStr)
+    {
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"HH_mm_ss"];
+        NSString *name = [dateFormatter stringFromDate:[NSDate date]];
+        request.param_name = [NSString stringWithFormat:@"%@.%@",name, fileSuffix];
+        __RELEASE(dateFormatter);
+    }
+    else
+    {
+        request.param_name = [NSString stringWithFormat:@"%@.%@",_inputStr, fileSuffix];
     }
     
+    request.param_size = [NSString stringWithFormat:@"%u", [data length]];
+    request.param_upload_type = @"control";
+    request.paramUploadData = data;
+    
+    [self sendCgiRequest:request];
 }
 
 
 - (void)inputStr:(NSString *)title
 {
-    
-    /*
-     TextAlertView *alert = [[TextAlertView alloc] initWithTitle:title message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
-     UITextField *textInput = [[UITextField alloc] initWithFrame:CGRectZero];
-     textInput.borderStyle = UITextBorderStyleRoundedRect;
-     [textInput setPlaceholder:@"输入"];
-     [textInput setTag:0xAA];
-     [alert addSubview:textInput];
-     [alert setDelegate:self];
-     [alert setTag:0xDD];
-     [alert show];
-     __RELEASE(textInput);
-     CFRunLoopRun();
-     __RELEASE(alert);
-     
-     */
-    YIPopupTextView* inputStr = [[YIPopupTextView alloc] initWithPlaceHolder:title maxCount:300];
-    inputStr.delegate = self;
-    
-    if(isImagePic)
-    {
-        [inputStr showInView:ipc.view];
-        isImagePic=false;
-        
-    }else{
-        [inputStr showInView:self.view];
-    }
-    
-    
-    input_type=@"_inputStr";
+    TextAlertView *alert = [[TextAlertView alloc] initWithTitle:title message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+    UITextField *textInput = [[UITextField alloc] initWithFrame:CGRectZero];
+    textInput.borderStyle = UITextBorderStyleRoundedRect;
+    [textInput setPlaceholder:@"输入"];
+    [textInput setTag:0xAA];
+    [alert addSubview:textInput];
+    [alert setDelegate:self];
+    [alert setTag:0xDD];
+    [alert show];
+    __RELEASE(textInput);
     CFRunLoopRun();
+    __RELEASE(alert);
 }
 
 - (void)inputRecordKey
 {
-    
-    /*
-     TextAlertView *alert = [[TextAlertView alloc] initWithTitle:@"输入key值" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
-     UITextField *textInput = [[UITextField alloc] initWithFrame:CGRectZero];
-     textInput.borderStyle = UITextBorderStyleRoundedRect;
-     [textInput setPlaceholder:@"key值"];
-     [textInput setTag:0xAA];
-     [alert addSubview:textInput];
-     [alert setDelegate:self];
-     [alert setTag:0xBB];
-     [alert show];
-     __RELEASE(textInput);
-     CFRunLoopRun();
-     __RELEASE(alert);
-     
-     */
-    
-    YIPopupTextView* inputRecordKey = [[YIPopupTextView alloc] initWithPlaceHolder:@"输入key值" maxCount:300];
-    inputRecordKey.delegate = self;
-    [inputRecordKey showInView:self.view];
-    
-    input_type=@"_recordKey";
+    TextAlertView *alert = [[TextAlertView alloc] initWithTitle:@"输入key值" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+    UITextField *textInput = [[UITextField alloc] initWithFrame:CGRectZero];
+    textInput.borderStyle = UITextBorderStyleRoundedRect;
+    [textInput setPlaceholder:@"key值"];
+    [textInput setTag:0xAA];
+    [alert addSubview:textInput];
+    [alert setDelegate:self];
+    [alert setTag:0xBB];
+    [alert show];
+    __RELEASE(textInput);
     CFRunLoopRun();
+    __RELEASE(alert);
 }
 
 - (void)inputRecordValue
 {
-    
-    /*
-     TextAlertView *alert = [[TextAlertView alloc] initWithTitle:@"输入value值" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
-     UITextField *textInput = [[UITextField alloc] initWithFrame:CGRectZero];
-     textInput.borderStyle = UITextBorderStyleRoundedRect;
-     [textInput setPlaceholder:@"value值"];
-     [textInput setTag:0xAA];
-     [alert addSubview:textInput];
-     [alert setDelegate:self];
-     [alert setTag:0xCC];
-     [alert show];
-     __RELEASE(textInput);
-     CFRunLoopRun();
-     __RELEASE(alert);
-     
-     */
-    
-    YIPopupTextView* inputRecordKey = [[YIPopupTextView alloc] initWithPlaceHolder:@"输入value值" maxCount:300];
-    inputRecordKey.delegate = self;
-    [inputRecordKey showInView:self.view];
-    
-    input_type=@"_recordValue";
+    TextAlertView *alert = [[TextAlertView alloc] initWithTitle:@"输入value值" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+    UITextField *textInput = [[UITextField alloc] initWithFrame:CGRectZero];
+    textInput.borderStyle = UITextBorderStyleRoundedRect;
+    [textInput setPlaceholder:@"value值"];
+    [textInput setTag:0xAA];
+    [alert addSubview:textInput];
+    [alert setDelegate:self];
+    [alert setTag:0xCC];
+    [alert show];
+    __RELEASE(textInput);
     CFRunLoopRun();
-}
-
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{
-    if(picker == uploadPic_ipc)
-    {
-        WeiYun_upload_photo_GET *request = [[WeiYun_upload_photo_GET alloc] init];
-        UIImage *image = (UIImage *)[info objectForKey:UIImagePickerControllerOriginalImage];
-        NSData *imageData = UIImagePNGRepresentation(image);
-        if(nil == imageData)
-        {
-            imageData = UIImageJPEGRepresentation(image, 1.0f);
-            [self sendWeiyunUploadRequest:request data:imageData fileSuffix:@"jpg"];
-        }
-        else
-        {
-            [self sendWeiyunUploadRequest:request data:imageData fileSuffix:@"png"];
-        }
-        
-        [self dismissModalViewControllerAnimated:YES];
-    }
-}
-
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
-{
-    [self dismissModalViewControllerAnimated:YES];
+    __RELEASE(alert);
 }
 
 - (void)getFileInfoList:(TCAPIRequest *)request didResponse:(APIResponse *)response
@@ -702,7 +484,6 @@
         }
         
         _videoFileId = [content copy];
-        
     }
     else if([request isMemberOfClass:[WeiYun_get_music_list_GET class]])
     {
@@ -713,9 +494,6 @@
         
         _audioFileId = [content copy];
     }
-    
-    [_weiyunFileIdListViewController setArrFileInfo:content];
-    [[_weiyunFileIdListViewController tableView] reloadData];
 }
 
 - (BOOL)getPicFromResponse:(TCAPIRequest *)request didResponse:(APIResponse *)response
@@ -825,7 +603,6 @@
 
 - (NSString *)responseDataProcess:(TCAPIRequest *)request didResponse:(APIResponse *)response
 {
-    
     if([request isKindOfClass:[WeiYun_get_photo_list_GET class]])
     {
         [self getFileInfoList:request didResponse:response];
@@ -850,10 +627,6 @@
                 NSString *resStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                 [_allRecord addObject:@{@"key":resStr}];
             }
-            
-            [_weiyunFileIdListViewController setArrFileInfo:_allRecord];
-            [[_weiyunFileIdListViewController tableView] reloadData];
-            
         }
     }
     
@@ -919,9 +692,6 @@
             [str appendString: [NSString stringWithFormat:@"%@:%@\n",key,result]];
         }
     }
-    
-    
-    
     return str;
 }
 
@@ -1066,6 +836,12 @@
     [_progressView setProgress:progress animated:YES];
 }
 
+- (void)cgiRequest:(TCAPIRequest *)request didWriteData:(long long)bytesWritten totalBytesWritten:(long long)totalBytesWritten expectedTotalBytes:(long long) expectedTotalBytes
+{
+    CGFloat progress = ((CGFloat)totalBytesWritten / (CGFloat)expectedTotalBytes);
+    [_progressView setProgress:progress animated:YES];
+}
+
 #pragma mark TCAPIRequestUploadDelegate
 - (BOOL)cgiUploadRequest:(TCAPIRequest *)uploadRequest shouldBeginUploadingStorageRequest:(NSURLRequest *)storageRequest
 {
@@ -1080,40 +856,23 @@
     return YES;
 }
 
-
-#pragma mark YIPopupTextViewDelegate
-
-- (void)popupTextView:(YIPopupTextView *)textView willDismissWithText:(NSString *)text
+#pragma mark UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    
-    NSLog(@"will dismiss");
-    //self.textView.text = text;
-    
-    if ([input_type isEqualToString:@"_inputStr"]) {
-        _inputStr=text;
-        input_type=nil;
-        
-    }else if([input_type isEqualToString:@"_recordValue"]){
-        
-        _recordValue=text;
-        input_type=nil;
-        
-    }else if([input_type isEqualToString:@"_recordKey"]){
-        _recordKey=text;
-        input_type=nil;
+    if(0xBB == [alertView tag])
+    {
+        _recordKey = [[(UITextField *)[alertView viewWithTag:0xAA] text] copy];
+    }
+    else if(0xCC == [alertView tag])
+    {
+        _recordValue = [[(UITextField *)[alertView viewWithTag:0xAA] text] copy];
+    }
+    else if(0xDD == [alertView tag])
+    {
+        _inputStr = [[(UITextField *)[alertView viewWithTag:0xAA] text] copy];
     }
     
-    
     CFRunLoopStop(CFRunLoopGetCurrent());
-    
-}
-
-
-- (void)popupTextView:(YIPopupTextView *)textView didDismissWithText:(NSString *)text
-{
-    NSLog(@"did dismiss");
-    
-    
 }
 
 

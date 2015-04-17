@@ -2,7 +2,7 @@
 //  NSURLRequest+IgnoreSSL.h
 //  tencentOAuthDemo
 //
-//  Created by qqconnect on 13-5-20.
+//  Created by JeaminW on 13-5-20.
 //
 //
 
