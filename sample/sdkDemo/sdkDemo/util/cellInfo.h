@@ -13,18 +13,9 @@ typedef enum
     kApiQZone,
     kApiQQVip,
     kApiQQT,
-    kApiQQCloud,
     kApiQQ,
     kApiQuick,
 }apiType;
-
-typedef enum
-{
-    kWeiyunPhoto,
-    kWeiyunMusic,
-    kWeiyunVideo,
-    kWeiyunRecord,
-}weiyunType;
 
 @interface cellInfo : NSObject
 + (cellInfo *)info:(NSString *)title target:(id)target Sel:(SEL)sel viewController:(UIViewController *)viewController userInfo:(id)userInfo;

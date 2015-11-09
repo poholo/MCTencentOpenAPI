@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import <TencentOpenAPI/TencentOAuth.h>
-#import <TencentOpenAPI/WeiyunAPI.h>
 
 @interface sdkDemoViewController : UITableViewController<UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 {

@@ -17,10 +17,11 @@
 #import "TCApiObjectEditController.h"
 #import "TCApiObjectEditController.h"
 #import "TencentOpenAPI/QQApiInterface.h"
+#import "QBImagePickerController.h"
 
 #define TCSafeRelease(__tcObj) { [__tcObj release]; __tcObj = nil; }
 
-@interface QZoneTableViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface QZoneTableViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate, QBImagePickerControllerDelegate>
 {
     
 }
@@ -64,6 +65,9 @@
         
         [cellQZone addObject:[cellInfo info:@"发表日志" target:self Sel:@selector(addBlog) viewController:nil]];
         [cellQZone addObject:[cellInfo info:@"设置用户头像" target:self Sel:@selector(setUserHeadPic) viewController:nil]];
+        [cellQZone addObject:[cellInfo info:@"分享文本到QZone写说说" target:self Sel:@selector(shareTextToQZoneMood) viewController:nil]];
+        [cellQZone addObject:[cellInfo info:@"分享图片到QZone写说说/传照片" target:self Sel:@selector(shareImagesToQZone) viewController:nil]];
+        [cellQZone addObject:[cellInfo info:@"分享视频到QZone写说说" target:self Sel:@selector(shareVideoToQZoneMood) viewController:nil]];
         [[super sectionName] addObject:@"QZone"];
         [[super sectionRow] addObject:cellQZone];
         
@@ -113,8 +117,8 @@
          NSURL *previewURL = [NSURL URLWithString:@"http://img1.gtimg.com/sports/pics/hv1/87/16/1037/67435092.jpg"];
          NSURL* url = [NSURL URLWithString:apiObjEditCtrl.objUrl.text];
          
-         QQApiNewsObject* imgObj = [QQApiNewsObject objectWithURL:url title:apiObjEditCtrl.objTitle.text description:apiObjEditCtrl.objDesc.text previewImageURL:previewURL];
-         
+         QQApiImageArrayForQZoneObject *imgObj = [QQApiImageArrayForQZoneObject objectWithimageDataArray:nil title:apiObjEditCtrl.objDesc.text ? :@""];
+         [imgObj setTitle:apiObjEditCtrl.objTitle.text ? : @""];
          [imgObj setCflag:kQQAPICtrlFlagQZoneShareOnStart];
          
          SendMessageToQQReq* req = [SendMessageToQQReq reqWithContent:imgObj];
@@ -334,6 +338,65 @@
             [alert show];
         }
     }
+}
+
+- (void)shareTextToQZoneMood
+{
+    QQApiImageArrayForQZoneObject *txtObj = [QQApiImageArrayForQZoneObject objectWithimageDataArray:nil title:@"测试一下分享到空间写说说吧~"];
+    SendMessageToQQReq* req = [SendMessageToQQReq reqWithContent:txtObj];
+    QQApiSendResultCode sent = [QQApiInterface sendReq:req];
+    [self handleSendResult:sent];
+}
+
+- (void)shareImagesToQZone
+{
+    QBImagePickerController *imgPicker = [[QBImagePickerController alloc] init];
+    imgPicker.delegate = self;
+    imgPicker.allowsMultipleSelection = YES;
+    imgPicker.filterType = QBImagePickerControllerFilterTypePhotos;
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:imgPicker];
+    [self.navigationController presentViewController:navigationController animated:YES completion:NULL];
+}
+
+- (void)shareVideoToQZoneMood
+{
+    QBImagePickerController *imgPicker = [[QBImagePickerController alloc] init];
+    imgPicker.delegate = self;
+    imgPicker.allowsMultipleSelection = NO;
+    imgPicker.filterType = QBImagePickerControllerFilterTypeVideos;
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:imgPicker];
+    [self.navigationController presentViewController:navigationController animated:YES completion:NULL];
+}
+
+#pragma mark - QBImagePickerControllerDelegate
+
+- (void)imagePickerController:(QBImagePickerController *)imagePickerController didSelectAsset:(ALAsset *)asset
+{
+    [imagePickerController dismissViewControllerAnimated:YES completion:^{
+        NSURL *url = [asset valueForProperty:ALAssetPropertyAssetURL];
+        QQApiVideoForQZoneObject *videoObj = [QQApiVideoForQZoneObject objectWithAssetURL:[url absoluteString] title:@"测试一下分享视频到空间吧~"];
+        SendMessageToQQReq* req = [SendMessageToQQReq reqWithContent:videoObj];
+        QQApiSendResultCode sent = [QQApiInterface sendReq:req];
+        [self handleSendResult:sent];
+    }];
+}
+
+- (void)imagePickerController:(QBImagePickerController *)imagePickerController didSelectAssets:(NSArray *)assets
+{
+    NSMutableArray *photoArray = [NSMutableArray array];
+    for (ALAsset *asset in assets) {
+        ALAssetRepresentation *rep = [asset defaultRepresentation];
+        Byte *buffer = (Byte*)malloc(rep.size);
+        NSUInteger buffered = [rep getBytes:buffer fromOffset:0.0 length:rep.size error:nil];
+        NSData *data = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];//this is NSData may be what you want
+        [photoArray addObject:data];
+    }
+    [imagePickerController dismissViewControllerAnimated:YES completion:^{
+        QQApiImageArrayForQZoneObject *imgObj = [QQApiImageArrayForQZoneObject objectWithimageDataArray:photoArray title:@"测试一下分享图片到空间吧~小于9张走写说说，大于9张走传照片哟~"];
+        SendMessageToQQReq* req = [SendMessageToQQReq reqWithContent:imgObj];
+        QQApiSendResultCode sent = [QQApiInterface sendReq:req];
+        [self handleSendResult:sent];
+    }];
 }
 
 

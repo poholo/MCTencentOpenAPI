@@ -19,6 +19,7 @@ typedef void(^TCApiObjectEditCancelHandler)(TCApiObjectEditController *editCtrl)
 @property (retain, nonatomic) IBOutlet UITextView *objDesc;
 @property (retain, nonatomic) IBOutlet UITextView *objText;
 @property (retain, nonatomic) IBOutlet UITextView *objUrl;
+@property (retain, nonatomic) NSArray *imgDataArray;
 
 - (void)modalIn:(UIViewController*)parentCtrl withDoneHandler:(TCApiObjectEditDoneHandler)doneHandler cancelHandler:(TCApiObjectEditCancelHandler)cancelHandler animated:(BOOL)animated;
 

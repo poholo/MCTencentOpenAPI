@@ -58,10 +58,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    // Do any additional setup after loading the view, typically from a nib.
     
     CGRect frame = [[self view] bounds];
-
+    
     self.operationList = [NSArray arrayWithObjects:
                           @"分享文本消息",
                           @"分享图片消息",
@@ -145,33 +145,33 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     int section = indexPath.section;
-	int row = indexPath.row;
-	if(section == 0)
+    int row = indexPath.row;
+    if(section == 0)
     {
-		switch (row)
+        switch (row)
         {
-			case 0:
-				// QQ login
-				[self sendTextMessage];
-				break;
-			case 1:
-				[self sendImageMessage];
-				break;
+            case 0:
+                // QQ login
+                [self sendTextMessage];
+                break;
+            case 1:
+                [self sendImageMessage];
+                break;
             case 2:
                 [self sendNewsMessageWithNetworkImage];
                 break;
-			case 3:
-				[self sendNewsMessageWithLocalImage];
-				break;
-			case 4:
-				[self sendAudioMessage];
-				break;
-			case 5:
-				[self sendVideoMessage];
-				break;
+            case 3:
+                [self sendNewsMessageWithLocalImage];
+                break;
+            case 4:
+                [self sendAudioMessage];
+                break;
+            case 5:
+                [self sendVideoMessage];
+                break;
             case 6:
-				[self PayFromIphoneQQ];
-				break;
+                [self PayFromIphoneQQ];
+                break;
             case 7:
                 [self shareToQQFavorite];
                 break;
@@ -184,14 +184,14 @@
             case 10:
                 [self sendToQQGroupChat];
                 break;
-            
-			default:
-				NSLog(@"No event handling for row %d",row);
-				break;
-		}
-	}
-	
-	[_operationTable deselectRowAtIndexPath:indexPath animated:YES];
+                
+            default:
+                NSLog(@"No event handling for row %d",row);
+                break;
+        }
+    }
+    
+    [_operationTable deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #if BUILD_QQAPIDEMO
@@ -241,16 +241,16 @@
     apiObjEditCtrl.objDesc.hidden = YES;
     apiObjEditCtrl.objUrl.hidden = YES;
     apiObjEditCtrl.objText.text = @"马化腾指出，过去两年移动互联网有很多开放平台非常成功。事实上到现在来看，发展到现在一年多，最关键的开放平台是能不能真正从用户和经济回报中打造生态链。";
-
+    
     [apiObjEditCtrl modalIn:self withDoneHandler:^(TCApiObjectEditController *editCtrl)
-        {
-            QQApiTextObject* txtObj = [QQApiTextObject objectWithText:editCtrl.objText.text];
-            SendMessageToQQReq* req = [SendMessageToQQReq reqWithContent:txtObj];
-            
-            QQApiSendResultCode sent = [QQApiInterface sendReq:req];
-            [self handleSendResult:sent];
-        }
-        cancelHandler:NULL animated:YES];
+     {
+         QQApiTextObject* txtObj = [QQApiTextObject objectWithText:editCtrl.objText.text];
+         SendMessageToQQReq* req = [SendMessageToQQReq reqWithContent:txtObj];
+         
+         QQApiSendResultCode sent = [QQApiInterface sendReq:req];
+         [self handleSendResult:sent];
+     }
+              cancelHandler:NULL animated:YES];
     TCSafeRelease(apiObjEditCtrl)
     
 #endif
@@ -292,16 +292,16 @@
     apiObjEditCtrl.objTitle.text = @"默认分享图";
     
     [apiObjEditCtrl modalIn:self withDoneHandler:^(TCApiObjectEditController *editCtrl)
-        {
-            NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"img.jpg"];
-            NSData* data = [NSData dataWithContentsOfFile:path];
-
-            QQApiImageObject* img = [QQApiImageObject objectWithData:data previewImageData:data title:apiObjEditCtrl.objTitle.text description:apiObjEditCtrl.objDesc.text];
-            SendMessageToQQReq* req = [SendMessageToQQReq reqWithContent:img];
-
-            QQApiSendResultCode sent = [QQApiInterface sendReq:req];
-            [self handleSendResult:sent];
-        }
+     {
+         NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"img.jpg"];
+         NSData* data = [NSData dataWithContentsOfFile:path];
+         
+         QQApiImageObject* img = [QQApiImageObject objectWithData:data previewImageData:data title:apiObjEditCtrl.objTitle.text description:apiObjEditCtrl.objDesc.text];
+         SendMessageToQQReq* req = [SendMessageToQQReq reqWithContent:img];
+         
+         QQApiSendResultCode sent = [QQApiInterface sendReq:req];
+         [self handleSendResult:sent];
+     }
               cancelHandler:NULL animated:YES];
     TCSafeRelease(apiObjEditCtrl)
     
@@ -331,7 +331,7 @@
      }
               cancelHandler:NULL animated:YES];
     TCSafeRelease(apiObjEditCtrl)
-
+    
 #endif
 }
 
@@ -346,17 +346,17 @@
     apiObjEditCtrl.objUrl.text = @"http://wfmusic.3g.qq.com/s?g_f=0&fr=&aid=mu_detail&id=2511915";
     
     [apiObjEditCtrl modalIn:self withDoneHandler:^(TCApiObjectEditController *editCtrl)
-        {
-            NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"audio.jpg"];
-            NSData* data = [NSData dataWithContentsOfFile:path];
-            NSURL* url = [NSURL URLWithString:apiObjEditCtrl.objUrl.text];
-
-            QQApiAudioObject* img = [QQApiAudioObject objectWithURL:url title:apiObjEditCtrl.objTitle.text description:apiObjEditCtrl.objDesc.text previewImageData:data];
-            SendMessageToQQReq* req = [SendMessageToQQReq reqWithContent:img];
-
-            QQApiSendResultCode sent = [QQApiInterface sendReq:req];
-            [self handleSendResult:sent];
-        }
+     {
+         NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"audio.jpg"];
+         NSData* data = [NSData dataWithContentsOfFile:path];
+         NSURL* url = [NSURL URLWithString:apiObjEditCtrl.objUrl.text];
+         
+         QQApiAudioObject* img = [QQApiAudioObject objectWithURL:url title:apiObjEditCtrl.objTitle.text description:apiObjEditCtrl.objDesc.text previewImageData:data];
+         SendMessageToQQReq* req = [SendMessageToQQReq reqWithContent:img];
+         
+         QQApiSendResultCode sent = [QQApiInterface sendReq:req];
+         [self handleSendResult:sent];
+     }
               cancelHandler:NULL animated:YES];
     TCSafeRelease(apiObjEditCtrl)
     
@@ -374,25 +374,25 @@
     apiObjEditCtrl.objUrl.text = @"http://www.tudou.com/programs/view/_cVM3aAp270/";
     
     [apiObjEditCtrl modalIn:self withDoneHandler:^(TCApiObjectEditController *editCtrl)
-        {
-            NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"video.jpg"];
-            NSData* data = [NSData dataWithContentsOfFile:path];
-            NSURL* url = [NSURL URLWithString:apiObjEditCtrl.objUrl.text];
-
-            /*  
-             * QQApiVideoObject类型的分享，目前在android和PC上接收消息时，展现有问题，待手Q版本以后更新支持
-             * 目前如果要分享视频请使用 QQApiNewsObject 类型，URL填视频所在的H5地址
-
-            QQApiVideoObject* img = [QQApiVideoObject objectWithURL:url title:apiObjEditCtrl.objTitle.text description:apiObjEditCtrl.objDesc.text previewImageData:data];
-             */
-            
-            QQApiNewsObject* img = [QQApiNewsObject objectWithURL:url title:apiObjEditCtrl.objTitle.text description:apiObjEditCtrl.objDesc.text previewImageData:data];
-            
-            SendMessageToQQReq* req = [SendMessageToQQReq reqWithContent:img];
-
-            QQApiSendResultCode sent = [QQApiInterface sendReq:req];
-            [self handleSendResult:sent];
-        }
+     {
+         NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"video.jpg"];
+         NSData* data = [NSData dataWithContentsOfFile:path];
+         NSURL* url = [NSURL URLWithString:apiObjEditCtrl.objUrl.text];
+         
+         /*
+          * QQApiVideoObject类型的分享，目前在android和PC上接收消息时，展现有问题，待手Q版本以后更新支持
+          * 目前如果要分享视频请使用 QQApiNewsObject 类型，URL填视频所在的H5地址
+          
+          QQApiVideoObject* img = [QQApiVideoObject objectWithURL:url title:apiObjEditCtrl.objTitle.text description:apiObjEditCtrl.objDesc.text previewImageData:data];
+          */
+         
+         QQApiNewsObject* img = [QQApiNewsObject objectWithURL:url title:apiObjEditCtrl.objTitle.text description:apiObjEditCtrl.objDesc.text previewImageData:data];
+         
+         SendMessageToQQReq* req = [SendMessageToQQReq reqWithContent:img];
+         
+         QQApiSendResultCode sent = [QQApiInterface sendReq:req];
+         [self handleSendResult:sent];
+     }
               cancelHandler:NULL animated:YES];
     TCSafeRelease(apiObjEditCtrl)
     
@@ -404,7 +404,7 @@
 #if BUILD_QQAPIDEMO
     
     //设置一个有效的订单号
-    //self.tenpayID = ....;
+    self.tenpayID = @"d8cce911de40b2719be0a40a8e85d5fb";
     
     NSString * tenpayAppInfo = [NSString stringWithFormat:@"appid#test1|bargainor_id#test2|channel#test3"];
     
@@ -484,7 +484,7 @@
 {
     //设置一个有效的号码
     NSString * qqNum = @"79796356";
-
+    
     if ([qqNum length] == 0) {
         UIAlertView *msgbox = [[UIAlertView alloc] initWithTitle:@"Error" message:@"在demo代码里设置一个有效号码" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil];
         [msgbox show];
@@ -547,10 +547,10 @@
          }
                   cancelHandler:NULL animated:YES];
         TCSafeRelease(apiObjEditCtrl)
-
+        
     }
     
-   #endif
+#endif
 }
 
 

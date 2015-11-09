@@ -189,7 +189,9 @@
 
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
-    self.view.frame = _rootViewFrame;
+    if (_rootViewFrame.size.height!=0 || _rootViewFrame.size.width!=0) {
+        self.view.frame = _rootViewFrame;
+    }
 }
 
 @end

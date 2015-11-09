@@ -81,7 +81,7 @@ static sdkCall *g_instance = nil;
 
 - (void)tencentDidNotLogin:(BOOL)cancelled
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:kLoginFailed object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kLoginCancelled object:self];
 }
 
 - (void)tencentDidNotNetWork

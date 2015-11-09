@@ -21,6 +21,7 @@
 //login
 #define kLoginSuccessed @"loginSuccessed"
 #define kLoginFailed    @"loginFailed"
+#define kLoginCancelled @"loginCancelled"
 
 //qzone
 #define kGetUserInfoResponse @"getUserInfoResponse"
