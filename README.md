@@ -1,0 +1,2 @@
+# MCTencentOpenAPI
+MCTencentOpenAPI是对TencentOpenAPI的映射，使用pod依赖管理，便于开发者快速集成TencentOpenAPI的QQ登录、分享等功能。
