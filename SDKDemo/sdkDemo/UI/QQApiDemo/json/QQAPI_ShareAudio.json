@@ -1,0 +1,73 @@
+{
+    "title": "分享音频消息",
+    "grouped": true,
+    "controllerName": "QQAPIDemoCommonController",
+    "sections":
+    [
+        {
+            "elements":
+            [
+                {
+                    "type": "QTextElement",
+                    "text": "分享音频消息"
+                }
+            ]
+        },
+        {
+            "elements":
+            [
+                {
+                    "type": "QEntryElement",
+                    "keyboardType": "Default",
+                    "title": "title",
+                    "placeholder": "填入分享的标题",
+                    "textValue": "不要说话",
+                    "bind": "textValue:binding_title"
+                },
+                {
+                    "type": "QEntryElement",
+                    "keyboardType": "Default",
+                    "title": "description",
+                    "placeholder": "填入分享的描述",
+                    "textValue": "专辑名：不想放手歌手名：陈奕迅",
+                    "bind": "textValue:binding_description"
+                },
+                {
+                    "type": "QEntryElement",
+                    "keyboardType": "Default",
+                    "title": "url",
+                    "placeholder": "填入分享的URL链接",
+                    "textValue": "http://y.qq.com/i/song.html?songid=432451&source=mobileQQ#wechat_redirect",
+                    "bind": "textValue:binding_url"
+                },
+                {
+                    "type": "QEntryElement",
+                    "keyboardType": "Default",
+                    "title": "preview image url",
+                    "placeholder": "填入分享预览图的URL链接",
+                    "textValue": "http://imgcache.qq.com/music/photo/mid_album_300/V/E/000J1pJ50cDCVE.jpg",
+                    "bind": "textValue:binding_previewImageUrl"
+                },
+                {
+                    "type": "QEntryElement",
+                    "keyboardType": "Default",
+                    "title": "stream url",
+                    "placeholder": "填入分享音视频的流媒体URL链接",
+                    "textValue": "http://10.136.9.109/fcgi-bin/fcg_music_get_playurl.fcg?song_id=1234&redirect=0&filetype=mp3&qqmusic_fromtag=15&app_id=100311325&app_key=b233c8c2c8a0fbee4f83781b4a04c595&device_id=1234",
+                    "bind": "textValue:binding_streamUrl"
+                }
+            ]
+        },
+        {
+            "elements":
+            [
+                {
+                    "type": "QButtonElement",
+                    "key": "shareBtn",
+                    "title": "分享",
+                    "controllerAction": "onShareAudio:"
+                }
+            ]
+        }
+    ]
+}

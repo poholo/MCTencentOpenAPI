@@ -1,0 +1,40 @@
+{
+    "title": "分享图片消息",
+    "grouped": true,
+    "controllerName": "QQAPIDemoCommonController",
+    "sections":
+    [
+        {
+            "elements":
+            [
+                {
+                    "type": "QTextElement",
+                    "text": "分享图片(本地)消息"
+                }
+            ]
+        },
+        {
+            "elements":
+            [
+                {
+                    "type": "QImageElement",
+                    "title": "image",
+                    "placeholder": "点击选择分享的图片",
+                    "source": "photoLibrary",
+                    "bind": "imageValue:binding_previewImage"
+                }
+            ]
+        },
+        {
+            "elements":
+            [
+                {
+                    "type": "QButtonElement",
+                    "key": "shareBtn",
+                    "title": "分享",
+                    "controllerAction": "onShareImage:"
+                }
+            ]
+        }
+    ]
+}

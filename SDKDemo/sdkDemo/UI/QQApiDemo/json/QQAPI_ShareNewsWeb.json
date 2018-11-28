@@ -1,0 +1,81 @@
+{
+    "title": "分享新闻(网络图片)消息",
+    "grouped": true,
+    "controllerName": "QQAPIDemoCommonController",
+    "sections":
+    [
+        {
+            "elements":
+            [
+                {
+                    "type": "QTextElement",
+                    "text": "分享新闻(网络图片)消息 直接点击分享的时候，使用的是普通的preview image url。打开下面开关后，则使用 webp url。"
+                }
+            ]
+        },
+        {
+            "elements":
+            [
+                {
+                    "type": "QEntryElement",
+                    "keyboardType": "Default",
+                    "title": "title",
+                    "placeholder": "填入分享的标题",
+                    "textValue": "定向分享标题",
+                    "bind": "textValue:binding_title"
+                },
+                {
+                    "type": "QEntryElement",
+                    "keyboardType": "Default",
+                    "title": "description",
+                    "placeholder": "填入分享的描述",
+                    "textValue": "定向分享描述",
+                    "bind": "textValue:binding_description"
+                },
+                {
+                    "type": "QEntryElement",
+                    "keyboardType": "Default",
+                    "title": "url",
+                    "placeholder": "填入分享的URL链接",
+                    "textValue": "http://tech.qq.com/a/20150313/006200.htm",
+                    "bind": "textValue:binding_url"
+                },
+                {
+                    "type": "QEntryElement",
+                    "keyboardType": "Default",
+                    "title": "preview image url",
+                    "placeholder": "填入分享预览图的URL链接",
+                    "textValue": "http://cdni.wired.co.uk/620x413/k_n/NewsForecast%20copy_620x413.jpg",
+                    "bind": "textValue:binding_previewImageUrl"
+                },
+                {
+                    "type": "QEntryElement",
+                    "keyboardType": "Default",
+                    "title": "webp url",
+                    "placeholder": "填入分享预览图的webpURL",
+                    "textValue": "http://p2.pstatp.com/list/300x196/ec30001c56a5b71c1c3.webp",
+                    "bind": "textValue:binding_webpImageUrl"
+                },
+                {
+                    "type": "QBooleanElement",
+                    "key": "kQQAPICtrlFlagWebp",
+                    "title": "模拟webp分享",
+                    "boolValue": 0,
+                    "controllerAction": "onSwitchWebpFlag:",
+                    "object": {"flagValue": 1}
+                }
+            ]
+        },
+        {
+            "elements":
+            [
+                {
+                    "type": "QButtonElement",
+                    "key": "shareBtn",
+                    "title": "分享",
+                    "controllerAction": "onShareNewsWeb:"
+                }
+            ]
+        }
+    ]
+}

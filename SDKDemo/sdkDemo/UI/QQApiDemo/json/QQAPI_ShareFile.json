@@ -1,0 +1,41 @@
+{
+    "title": "分享文件消息",
+    "grouped": true,
+    "controllerName": "QQAPIDemoCommonController",
+    "sections":
+    [
+     {
+     "elements":
+     [
+      {
+      "type": "QTextElement",
+      "text": "分享文件消息"
+      }
+      ]
+     },
+     {
+     "elements":
+     [
+      {
+      "type": "QEntryElement",
+      "keyboardType": "Default",
+      "title": "文件名",
+      "placeholder": "文件名",
+      "textValue": "test.txt",
+      "bind": "textValue:binding_description"
+      }
+     ]
+     },
+     {
+     "elements":
+     [
+      {
+      "type": "QButtonElement",
+      "key": "shareBtn",
+      "title": "分享",
+      "controllerAction": "onShareLocalFile:"
+      }
+      ]
+     }
+     ]
+}

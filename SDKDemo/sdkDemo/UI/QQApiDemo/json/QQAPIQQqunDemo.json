@@ -1,0 +1,32 @@
+{
+    "grouped": true,
+    "controllerName": "QQAPIDemoCommonController",
+    "title": "手Q定向分享测试Demo",
+    "key": "QQAPIDemo",
+    "sections":
+    [
+        {
+            "elements":
+            [
+                {
+                "type": "QButtonElement",
+                "key": "openJoinGroupBtn",
+                "title": "一键加群",
+                "grouped": true,
+                "controllerName": "QQAPIDemoCommonController",
+                "sections": [{}],
+                "object": {"jsonConfig": "QQAPI_JoinGroup"}
+                },
+                {
+                "type": "QButtonElement",
+                "key": "openGameConsortiumBindingGroupBtn",
+                "title": "游戏绑定公会群",
+                "grouped": true,
+                "controllerName": "QQAPIDemoCommonController",
+                "sections": [{}],
+                "object": {"jsonConfig": "QQAPI_GameConsortiumBindingGroup"}
+                }
+            ]
+        }
+    ]
+}

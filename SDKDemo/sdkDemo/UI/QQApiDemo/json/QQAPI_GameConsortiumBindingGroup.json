@@ -1,0 +1,56 @@
+{
+    "title": "开启绑定工会群",
+    "grouped": true,
+    "controllerName": "QQAPIDemoCommonController",
+    "sections":
+    [
+        {
+            "elements":
+            [
+                {
+                    "type": "QTextElement",
+                    "text": "手机qq绑定工会群"
+                },
+                {
+                    "type": "QEntryElement",
+                    "title": "游戏公会ID：",
+                    "placeholder": "添加游戏公会ID",
+                    "textValue": "2",
+                    "bind": "textValue:binding_GroupID"
+                },
+                {
+                     "type": "QEntryElement",
+                     "title": "游戏区域ID(分区ID)：",
+                     "placeholder": "添加游戏区域ID（分区ID）",
+                     "textValue": "1",
+                     "bind": "textValue:binding_GameSectionID"
+                },
+                 {
+                 "type": "QEntryElement",
+                 "title": "appkey：",
+                 "placeholder": "appkey",
+                 "textValue": "ABCD",
+                 "bind": "textValue:binding_appkey"
+                 },
+                {
+                     "type": "QEntryElement",
+                     "title": "群主签名：",
+                     "placeholder": "添加群主签名",
+                     "textValue": "49CDD78060DA8B2652BD2524E7E92E38",
+                     "bind": "textValue:binding_ownerSignature"
+                }
+            ]
+        },
+        {
+            "elements":
+            [
+                 {
+                     "type": "QButtonElement",
+                     "key": "genSignatureBtn",
+                     "title": "计算群主签名并绑定",
+                     "controllerAction": "onGenerateSignatureBind:"
+                 }
+            ]
+        }
+     ]
+}

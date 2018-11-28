@@ -1,0 +1,56 @@
+{
+    "title": "添加好友",
+    "grouped": true,
+    "controllerName": "QQAPIDemoCommonController",
+    "sections":
+    [
+        {
+            "elements":
+            [
+                {
+                    "type": "QTextElement",
+                    "text": "手机qq添加好友"
+                },
+                {
+                    "type": "QEntryElement",
+                    "title": "openID",
+                    "placeholder": "添加好友openID",
+                    "textValue": "A57597D3BA6F31A0F5D0049A354756FC",
+                    "bind": "textValue:binding_openID"
+                },
+                {
+                     "type": "QEntryElement",
+                     "title": "subID",
+                     "placeholder": "应用subID",
+                     "textValue": "1234",
+                     "bind": "textValue:binding_subID"
+                },
+                {
+                     "type": "QEntryElement",
+                     "title": "描述",
+                     "placeholder": "对添加人说点什么",
+                     "textValue": "一起玩游戏吧",
+                     "bind": "textValue:binding_description"
+                },
+                {
+                     "type": "QEntryElement",
+                     "title": "备注",
+                     "placeholder": "好友备注",
+                     "textValue": "游戏好友",
+                     "bind": "textValue:binding_remark"
+                }
+            ]
+        },
+        {
+            "elements":
+            [
+                {
+                    "type": "QButtonElement",
+                    "key": "shareBtn",
+                    "title": "添加",
+                    "controllerAction": "onAddOpenFriend:"
+                }
+            ]
+        }
+     ]
+}

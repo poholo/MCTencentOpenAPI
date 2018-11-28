@@ -1,0 +1,40 @@
+{
+    "title": "分享图片消息(多图到收藏)",
+    "grouped": true,
+    "controllerName": "QQAPIDemoCommonController",
+    "sections":
+    [
+        {
+            "elements":
+            [
+                {
+                    "type": "QTextElement",
+                    "text": "测试分享图片消息，只能分享到收藏，请在外面打开收藏开关。选择图片时候只能选一张图片，另外附加的图片程序会自动补充。"
+                }
+            ]
+        },
+        {
+            "elements":
+            [
+                {
+                    "type": "QImageElement",
+                    "title": "image",
+                    "placeholder": "点击选择分享的图片",
+                    "source": "photoLibrary",
+                    "bind": "imageValue:binding_previewImage"
+                }
+            ]
+        },
+        {
+            "elements":
+            [
+                {
+                    "type": "QButtonElement",
+                    "key": "shareBtn",
+                    "title": "分享",
+                    "controllerAction": "onShareMutileImage:"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,158 @@
+{
+    "grouped": true,
+    "controllerName": "QQAPIDemoCommonController",
+    "title": "手Q定向分享测试Demo",
+    "key": "QQAPIDemo",
+    "sections":
+    [
+     {
+     "elements":
+     [
+      {
+      "type": "QBooleanElement",
+      "key": "kQQAPICtrlFlagQZoneShareOnStart",
+      "title": "直接拉起空间分享",
+      "boolValue": 0,
+      "controllerAction": "onSwitchCFlag:",
+      "object": {"flagValue": 1}
+      },
+      {
+      "type": "QBooleanElement",
+      "key": "kQQAPICtrlFlagQZoneShareForbid",
+      "title": "屏蔽空间分享入口",
+      "boolValue": 0,
+      "controllerAction": "onSwitchCFlag:",
+      "object": {"flagValue": 2}
+      },
+      {
+      "type": "QBooleanElement",
+      "key": "kQQAPICtrlFlagQQShareFavorites",
+      "title": "收藏",
+      "boolValue": 0,
+      "controllerAction": "onSwitchCFlag:",
+      "object": {"flagValue": 8}
+      },
+      {
+      "type": "QBooleanElement",
+      "key": "kQQAPICtrlFlagQQShareDataline",
+      "title": "数据线",
+      "boolValue": 0,
+      "controllerAction": "onSwitchCFlag:",
+      "object": {"flagValue": 16}
+      },
+      {
+      "type": "QBooleanElement",
+      "key": "kQQAPICtrlFlagQQShareEnableArk",
+      "title": "支持ARK",
+      "boolValue": 0,
+      "controllerAction": "onSwitchCFlag:",
+      "object": {"flagValue": 32}
+      },
+      {
+      "type": "QEntryElement",
+      "key": "inputArkJson",
+      "keyboardType": "Default",
+      "title": "json:",
+      "placeholder": "请输入ark json",
+      "textValue": ""
+      }
+      
+      
+      ]
+     },
+     {
+     "elements":
+     [
+      {
+      "type": "QButtonElement",
+      "key": "shareTextBtn",
+      "title": "分享文本消息",
+      "grouped": true,
+      "controllerName": "QQAPIDemoCommonController",
+      "sections": [{}],
+      "object": {"jsonConfig": "QQAPI_ShareText"},
+      "controllerAction": "onShowShareSubMenu:"
+      },
+      {
+      "type": "QButtonElement",
+      "key": "shareImageBtn",
+      "title": "分享图片(本地)消息",
+      "grouped": true,
+      "controllerName": "QQAPIDemoCommonController",
+      "sections": [{}],
+      "object": {"jsonConfig": "QQAPI_ShareImage"},
+      "controllerAction": "onShowShareSubMenu:"
+      },
+      {
+      "type": "QButtonElement",
+      "key": "shareImageBtn",
+      "title": "分享多图(请在上面选择-收藏)",
+      "grouped": true,
+      "controllerName": "QQAPIDemoCommonController",
+      "sections": [{}],
+      "object": {"jsonConfig": "QQAPI_ShareMutileImage"},
+      "controllerAction": "onShowShareSubMenu:"
+      },
+      {
+      "type": "QButtonElement",
+      "key": "shareNewsLocalBtn",
+      "title": "分享新闻(本地图片)消息",
+      "grouped": true,
+      "controllerName": "QQAPIDemoCommonController",
+      "sections": [{}],
+      "object": {"jsonConfig": "QQAPI_ShareNewsLocal"},
+      "controllerAction": "onShowShareSubMenu:"
+      },
+      {
+      "type": "QButtonElement",
+      "key": "shareNewsWebBtn",
+      "title": "分享新闻(网络图片)消息",
+      "grouped": true,
+      "controllerName": "QQAPIDemoCommonController",
+      "sections": [{}],
+      "object": {"jsonConfig": "QQAPI_ShareNewsWeb"},
+      "controllerAction": "onShowShareSubMenu:"
+      },
+      {
+      "type": "QButtonElement",
+      "key": "shareAudioBtn",
+      "title": "分享音频消息",
+      "grouped": true,
+      "controllerName": "QQAPIDemoCommonController",
+      "sections": [{}],
+      "object": {"jsonConfig": "QQAPI_ShareAudio"},
+      "controllerAction": "onShowShareSubMenu:"
+      },
+      {
+      "type": "QButtonElement",
+      "key": "shareVideoBtn",
+      "title": "分享视频消息",
+      "grouped": true,
+      "controllerName": "QQAPIDemoCommonController",
+      "sections": [{}],
+      "object": {"jsonConfig": "QQAPI_ShareVideo"},
+      "controllerAction": "onShowShareSubMenu:"
+      },
+      {
+      "type": "QButtonElement",
+      "key": "shareFileBtn",
+      "title": "分享文件(数据线)",
+      "grouped": true,
+      "controllerName": "QQAPIDemoCommonController",
+      "sections": [{}],
+      "object": {"jsonConfig": "QQAPI_ShareFile"},
+      "controllerAction": "onShowShareSubMenu:"
+      },
+      {
+      "type": "QButtonElement",
+      "key": "openAddFriendBtn",
+      "title": "添加好友",
+      "grouped": true,
+      "controllerName": "QQAPIDemoCommonController",
+      "sections": [{}],
+      "object": {"jsonConfig": "QQAPI_AddFriend"}
+      }
+      ]
+     }
+     ]
+}

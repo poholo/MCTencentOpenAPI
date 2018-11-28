@@ -1,0 +1,41 @@
+{
+    "title": "分享文本消息",
+    "grouped": true,
+    "controllerName": "QQAPIDemoCommonController",
+    "sections":
+    [
+        {
+            "elements":
+            [
+                {
+                    "type": "QTextElement",
+                    "text": "发送文本消息"
+                }
+            ]
+        },
+        {
+            "elements":
+            [
+                {
+                    "type": "QEntryElement",
+                    "keyboardType": "Default",
+                    "title": "text",
+                    "placeholder": "填入分享的文本内容",
+                    "textValue": "定向分享文本内容",
+                    "bind": "textValue:binding_text"
+                }
+            ]
+        },
+        {
+            "elements":
+            [
+                {
+                    "type": "QButtonElement",
+                    "key": "shareBtn",
+                    "title": "分享",
+                    "controllerAction": "onShareText:"
+                }
+            ]
+        }
+    ]
+}

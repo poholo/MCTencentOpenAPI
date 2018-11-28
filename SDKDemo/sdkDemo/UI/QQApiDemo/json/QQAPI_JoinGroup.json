@@ -1,0 +1,42 @@
+{
+    "title": "一键加群",
+    "grouped": true,
+    "controllerName": "QQAPIDemoCommonController",
+    "sections":
+    [
+        {
+            "elements":
+            [
+                {
+                    "type": "QTextElement",
+                    "text": "加群"
+                },
+                {
+                    "type": "QEntryElement",
+                    "title": "群号",
+                    "placeholder": "群号，可以不填",
+                    "textValue": "",
+                    "bind": "textValue:binding_GroupID"
+                },
+                {
+                     "type": "QEntryElement",
+                     "title": "key",
+                     "placeholder": "到qun.qq.com获取",
+                     "textValue": "ZjmDrsuLDjeF-CGL0HFPez48n3y-xD99",
+                     "bind": "textValue:binding_GroupKey"
+                }
+            ]
+        },
+        {
+            "elements":
+            [
+                {
+                    "type": "QButtonElement",
+                    "key": "shareBtn",
+                    "title": "加入",
+                    "controllerAction": "onJoinGroup:"
+                }
+            ]
+        }
+     ]
+}

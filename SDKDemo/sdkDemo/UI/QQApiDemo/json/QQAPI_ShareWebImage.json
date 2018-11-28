@@ -1,0 +1,41 @@
+{
+    "title": "分享图片消息",
+    "grouped": true,
+    "controllerName": "QQAPIDemoCommonController",
+    "sections":
+    [
+        {
+            "elements":
+            [
+                {
+                    "type": "QTextElement",
+                    "text": "分享图片(网络)消息"
+                }
+            ]
+        },
+        {
+            "elements":
+            [
+                {
+                    "type": "QEntryElement",
+                    "keyboardType": "Default",
+                    "title": "imageUrl",
+                    "placeholder": "填入分享的网络图片url",
+                    "textValue": "http://cdni.wired.co.uk/620x413/k_n/NewsForecast%20copy_620x413.jpg",
+                    "bind": "textValue:binding_previewImageUrl"
+                }
+            ]
+        },
+        {
+            "elements":
+            [
+                {
+                    "type": "QButtonElement",
+                    "key": "shareBtn",
+                    "title": "分享",
+                    "controllerAction": "onShareWebImage:"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,83 @@
+{
+    "title": "有奖分享",
+    "grouped": true,
+    "controllerName": "QQAPIDemoCommonController",
+    "sections":
+    [
+        {
+            "elements":
+            [
+                {
+                    "type": "QTextElement",
+                    "text": "有奖分享"
+                }
+            ]
+        },
+        {
+            "elements":
+            [
+                 {
+                     "type": "QEntryElement",
+                     "keyboardType": "Default",
+                     "title": "activityID",
+                     "placeholder": "填入活动ID",
+                     "textValue": "活动ID",
+                     "bind": "textValue:binding_activityID"
+                 },
+                {
+                    "type": "QEntryElement",
+                    "keyboardType": "Default",
+                    "title": "title",
+                    "placeholder": "填入分享的标题",
+                    "textValue": "有奖分享标题",
+                    "bind": "textValue:binding_title"
+                },
+                {
+                    "type": "QEntryElement",
+                    "keyboardType": "Default",
+                    "title": "description",
+                    "placeholder": "填入分享的描述",
+                    "textValue": "有奖分享描述",
+                    "bind": "textValue:binding_description"
+                },
+                {
+                    "type": "QEntryElement",
+                    "keyboardType": "Default",
+                    "title": "url",
+                    "placeholder": "填入分享的URL链接",
+                    "textValue": "http://www.163.com",
+                    "bind": "textValue:binding_url"
+                }
+            ]
+        },
+        {
+            "elements":
+            [
+                {
+                    "type": "QButtonElement",
+                    "key": "getBtn",
+                    "title": "查询活动状态",
+                    "controllerAction": "onGetActivity:"
+                },
+                 {
+                     "type": "QButtonElement",
+                     "key": "shareBtn",
+                     "title": "分享",
+                     "controllerAction": "onShareAward:"
+                 },
+                 {
+                     "type": "QButtonElement",
+                     "key": "exchangeBtn",
+                     "title": "拉取奖品",
+                     "controllerAction": "onGetAwardList:"
+                 },
+                 {
+                    "type": "QButtonElement",
+                    "key": "exchangeSucBtn",
+                    "title": "兑奖成功",
+                    "controllerAction": "onExchangeAwardSuc:"
+             }
+            ]
+        }
+    ]
+}
