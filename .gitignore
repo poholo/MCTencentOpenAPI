@@ -61,3 +61,10 @@ fastlane/test_output
 # https://github.com/johnno1962/injectionforxcode
 
 iOSInjectionProject/
+#AppCode IDE
+.idea
+.DS_Store
+IPA/
+upload/
+*.xcuserstate
+*.xcworkspace/
