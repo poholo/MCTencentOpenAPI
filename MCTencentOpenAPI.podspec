@@ -12,6 +12,14 @@ Pod::Spec.new do |s|
     s.requires_arc = true
 
     s.vendored_frameworks = 'SDK/TencentOpenAPI.framework'
+
+    s.xcconfig = {
+        'VALID_ARCHS' => 'arm64 x86_64',
+    }
+    s.pod_target_xcconfig = {
+        'VALID_ARCHS' => 'arm64 x86_64'
+    }
+    
     s.ios.frameworks = 'CoreTelephony', 'SystemConfiguration'
     s.ios.libraries = 'z', 'sqlite3.0', 'c++', 'iconv'
     
