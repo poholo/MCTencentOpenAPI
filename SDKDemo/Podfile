@@ -1,0 +1,6 @@
+target 'sdkDemo' do
+
+pod 'MCTencentOpenAPI', git: 'https://github.com/poholo/MCTencentOpenAPI'
+
+end
+
