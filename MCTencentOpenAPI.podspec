@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = "MCTencentOpenAPI"
-    s.version          = "3.3.3.1"
+    s.version          = "3.3.7"
     s.summary          = "TencentOpenAPI映射"
     s.description      = "MCTencentOpenAPI是对TencentOpenAPI的映射，使用pod依赖管理，便于开发者快速集成TencentOpenAPI的QQ登录、分享等功能。"
     s.license          = 'MIT'
@@ -12,6 +12,7 @@ Pod::Spec.new do |s|
     s.requires_arc = true
 
     s.vendored_frameworks = 'SDK/TencentOpenAPI.framework'
+    s.resource_bundles = {'Resources' => 'SDK/TencentOpenApi_IOS_Bundle.bundle'}
 
     s.xcconfig = {
         'VALID_ARCHS' => 'arm64 x86_64',
